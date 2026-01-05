@@ -1,0 +1,258 @@
+{
+  "products": [
+    {
+      "id": "1",
+      "name": "UNTITLED. Heavyweight Hoodie",
+      "slug": "untitled-heavyweight-hoodie",
+      "category": "Hoodies",
+      "price": 120,
+      "images": [
+        "/products/untitled_hoodie.png"
+      ],
+      "sizes": [
+        "S",
+        "M",
+        "L",
+        "XL",
+        "XXL"
+      ],
+      "rating": 4.8,
+      "reviewCount": 42,
+      "description": "Minimalist perfection. 500gsm heavyweight cotton for the ultimate drape. This hoodie defines the new standard of luxury streetwear basics.",
+      "features": [
+        "500gsm Heavyweight Cotton",
+        "Drop Shoulder Fit",
+        "Kangaroo Pocket",
+        "Double Lined Hood"
+      ],
+      "inStock": true,
+      "featured": true,
+      "newArrival": true
+    },
+    {
+      "id": "2",
+      "name": "Priest 'Age' Graphic Hoodie",
+      "slug": "priest-age-graphic-hoodie",
+      "category": "Hoodies",
+      "price": 110,
+      "images": [
+        "/products/priest_hoodie_front.png",
+        "/products/priest_hoodie_graphic.png"
+      ],
+      "sizes": [
+        "S",
+        "M",
+        "L",
+        "XL"
+      ],
+      "rating": 4.9,
+      "reviewCount": 18,
+      "description": "Provocative design meeting premium comfort. Puff print text on front, high-detail graphic on back. A statement piece that speaks volumes.",
+      "features": [
+        "Puff Print Front",
+        "High Definition Back Print",
+        "Premium French Terry",
+        "Oversized Silhouette"
+      ],
+      "inStock": true,
+      "featured": true,
+      "newArrival": true
+    },
+    {
+      "id": "3",
+      "name": "Zero Fucks Oversized Tee",
+      "slug": "zero-fucks-oversized-tee",
+      "category": "T-Shirts",
+      "price": 65,
+      "images": [
+        "/products/zero_fucks_tshirt.png"
+      ],
+      "sizes": [
+        "S",
+        "M",
+        "L",
+        "XL"
+      ],
+      "rating": 4.7,
+      "reviewCount": 156,
+      "description": "Statement piece. Boxy fit, drop shoulders, 280gsm cotton. Running on zero fucks.",
+      "features": [
+        "280gsm Heavy Cotton",
+        "Boxy Fit",
+        "Drop Shoulders",
+        "Screen Print"
+      ],
+      "inStock": true,
+      "featured": true,
+      "newArrival": false
+    },
+    {
+      "id": "4",
+      "name": "Just Chilling Palm Tee",
+      "slug": "just-chilling-palm-tee",
+      "category": "T-Shirts",
+      "price": 65,
+      "images": [
+        "/products/just_chilling_tshirt.png"
+      ],
+      "sizes": [
+        "M",
+        "L",
+        "XL",
+        "XXL"
+      ],
+      "rating": 4.6,
+      "reviewCount": 89,
+      "description": "Laid back vibes only. Contrast white puff print on deep black cotton.",
+      "features": [
+        "Puff Print Design",
+        "Premium Cotton",
+        "Relaxed Fit",
+        "Crew Neck"
+      ],
+      "inStock": true,
+      "featured": true,
+      "newArrival": true
+    },
+    {
+      "id": "5",
+      "name": "BlueLoc Oversized Hoodie",
+      "slug": "blueloc-oversized-hoodie",
+      "category": "Hoodies",
+      "price": 99.99,
+      "images": [
+        "/products/blueloc_hoodie_front_1767604938655.png",
+        "/products/blueloc_hoodie_back_1767604957835.png"
+      ],
+      "sizes": [
+        "XS",
+        "S",
+        "M",
+        "L",
+        "XL",
+        "XXL"
+      ],
+      "rating": 4.5,
+      "reviewCount": 1085,
+      "description": "Premium oversized hoodie with bold anime-inspired graphics. Features a striking blue colorway with intricate character artwork on the front.",
+      "features": [
+        "100% Premium Cotton",
+        "Oversized Fit",
+        "Screen Printed Design",
+        "Ribbed Cuffs"
+      ],
+      "inStock": true,
+      "featured": true,
+      "newArrival": false
+    },
+    {
+      "id": "6",
+      "name": "Demon Slayer Hoodie",
+      "slug": "demon-slayer-hoodie",
+      "category": "Hoodies",
+      "price": 109.99,
+      "images": [
+        "/products/demon_slayer_hoodie_1767604977764.png"
+      ],
+      "sizes": [
+        "S",
+        "M",
+        "L",
+        "XL",
+        "XXL"
+      ],
+      "rating": 4.8,
+      "reviewCount": 892,
+      "description": "Exclusive Demon Slayer character hoodie in vibrant pink/red. Features premium anime artwork with bold character graphics.",
+      "features": [
+        "High Quality Puff Print",
+        "French Terry Cotton",
+        "Limited Edition"
+      ],
+      "inStock": true,
+      "featured": true,
+      "newArrival": false
+    },
+    {
+      "id": "7",
+      "name": "Goku Dragon Oversized T-Shirt",
+      "slug": "goku-dragon-element-tee",
+      "category": "T-Shirts",
+      "price": 64.99,
+      "images": [
+        "/products/goku_tshirt_front_1767605011952.png"
+      ],
+      "sizes": [
+        "S",
+        "M",
+        "L",
+        "XL",
+        "XXL"
+      ],
+      "rating": 4.6,
+      "reviewCount": 721,
+      "description": "Epic Dragon Ball Z inspired tee featuring Goku with dramatic dragon graphics. Bold anime streetwear design on premium black fabric.",
+      "features": [
+        "Vintage Wash",
+        "Oversized Fit",
+        "Direct-to-Garment Print"
+      ],
+      "inStock": false,
+      "featured": false,
+      "newArrival": true
+    },
+    {
+      "id": "8",
+      "name": "Berserk Oversized T-Shirt",
+      "slug": "berserk-oversized-tee",
+      "category": "T-Shirts",
+      "price": 59.99,
+      "images": [
+        "/products/berserk_tshirt_front_1767604993809.png"
+      ],
+      "sizes": [
+        "XS",
+        "S",
+        "M",
+        "L",
+        "XL",
+        "XXL"
+      ],
+      "rating": 4.7,
+      "reviewCount": 654,
+      "description": "Dark and edgy Berserk character tee featuring Guts in a gothic aesthetic. Oversized fit for maximum street style impact.",
+      "features": [
+        "Heavyweight Cotton",
+        "Distressed Finish",
+        "Gothic Aesthetic"
+      ],
+      "inStock": true,
+      "featured": true,
+      "newArrival": false
+    },
+    {
+      "id": "prod_007",
+      "name": "Karana Katana Collectible",
+      "slug": "karana-katana-collectible",
+      "category": "collectibles",
+      "price": 149.99,
+      "images": [
+        "/products/berserk_tshirt_front_1767604993809.png"
+      ],
+      "sizes": [
+        "One Size"
+      ],
+      "rating": 4.9,
+      "reviewCount": 287,
+      "description": "Authentic replica katana collectible. Premium metal construction with detailed handle wrapping. Display stand included.",
+      "features": [
+        "Metal Blade",
+        "Detailed Handle",
+        "Display Stand Included"
+      ],
+      "inStock": true,
+      "featured": true,
+      "newArrival": true
+    }
+  ]
+}

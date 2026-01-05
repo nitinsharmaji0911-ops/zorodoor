@@ -1,0 +1,76 @@
+@import "tailwindcss";
+
+@layer base {
+  :root {
+    /* Premium Color Palette - Strict Adherence */
+    --color-bg-primary: #F5F2ED;
+    /* Warm Cream */
+    --color-bg-secondary: #EBE7E0;
+    /* Slightly darker cream for cards/sections */
+    --color-bg-white: #FFFFFF;
+    /* Pure White for clean contrast */
+
+    --color-text-primary: #2C2420;
+    /* Deep Mocha/Charcoal - NOT Black */
+    --color-text-secondary: #6B5E52;
+    /* Muted Brown */
+    --color-text-accent: #8B7355;
+    /* Warm Gold/Brown */
+
+    --color-border: #E8E2D8;
+    /* Subtle Taupe */
+
+    --radius-sm: 0.375rem;
+    --radius-md: 0.5rem;
+    --radius-lg: 0.75rem;
+    --radius-xl: 1rem;
+    --radius-2xl: 1.5rem;
+
+    /* Component Aliases for Compatibility */
+    --color-primary-bg: var(--color-bg-primary);
+    --color-primary-bg-secondary: var(--color-bg-secondary);
+    --color-accent-cyan: #2C2420;
+    /* Using Dark Mocha as strict accent for selection */
+    --color-accent-pink: #8B7355;
+    /* Gold as secondary accent */
+  }
+
+  body {
+    background-color: var(--color-bg-primary);
+    color: var(--color-text-primary);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    margin: 0;
+    padding: 0;
+  }
+
+  /* Custom Scrollbar */
+  ::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: var(--color-bg-primary);
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: #D4CAB8;
+    border-radius: 4px;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: #8B7355;
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  .flex-center {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}
