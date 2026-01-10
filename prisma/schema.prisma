@@ -36,6 +36,7 @@ model Product {
   rating      Float    @default(0)
   reviewCount Int      @default(0)
   inStock     Boolean  @default(true)
+  stock       Int      @default(0)
   featured    Boolean  @default(false)
   newArrival  Boolean  @default(false)
   createdAt   DateTime @default(now())
@@ -45,14 +46,16 @@ model Product {
 }
 
 model Order {
-  id        String      @id @default(cuid())
-  userId    String
-  user      User        @relation(fields: [userId], references: [id])
-  total     Float
-  status    String      @default("PENDING")
-  items     OrderItem[]
-  createdAt DateTime    @default(now())
-  updatedAt DateTime    @updatedAt
+  id              String      @id @default(cuid())
+  userId          String?     // Nullable for guest checkout if we support it, but for now we require auth
+  user            User?       @relation(fields: [userId], references: [id])
+  stripeSessionId String?     @unique
+  total           Float
+  status          String      @default("PENDING") // PENDING, PAID, SHIPPED, DELIVERED, CANCELLED
+  address         String?     // JSON string storing shipping details
+  items           OrderItem[]
+  createdAt       DateTime    @default(now())
+  updatedAt       DateTime    @updatedAt
 }
 
 model OrderItem {

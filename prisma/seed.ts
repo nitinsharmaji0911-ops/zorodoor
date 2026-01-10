@@ -26,6 +26,7 @@ async function main() {
                     rating: product.rating,
                     reviewCount: product.reviewCount,
                     inStock: product.inStock,
+                    stock: 50, // Default stock for seeding
                     featured: product.featured,
                     newArrival: product.newArrival,
                 },
@@ -41,6 +42,7 @@ async function main() {
                     rating: product.rating,
                     reviewCount: product.reviewCount,
                     inStock: product.inStock,
+                    stock: 50, // Default stock for seeding
                     featured: product.featured,
                     newArrival: product.newArrival,
                 },

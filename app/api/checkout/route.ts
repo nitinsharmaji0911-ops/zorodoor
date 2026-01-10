@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server';
 import Stripe from 'stripe';
 import { prisma } from '@/lib/prisma';
+import { auth } from "@/auth";
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY || 'sk_test_build_mock_key', {
     apiVersion: '2024-12-18.acacia' as any,
@@ -11,6 +12,15 @@ export async function POST(request: Request) {
         return NextResponse.json(
             { error: 'Stripe Secret Key is missing' },
             { status: 500 }
+        );
+    }
+
+    // Get authenticated user
+    const session = await auth();
+    if (!session || !session.user?.id) {
+        return NextResponse.json(
+            { error: 'Unauthorized' },
+            { status: 401 }
         );
     }
 
@@ -38,21 +48,27 @@ export async function POST(request: Request) {
                 );
             }
 
-            // Optional: Check stock
-            // if (!product.inStock) ...
+            // Check stock
+            if (product.stock < item.quantity) {
+                return NextResponse.json(
+                    { error: `Insufficient stock for ${product.name}` },
+                    { status: 409 }
+                );
+            }
 
             // Parse images to get the first one for Stripe
             const images = JSON.parse(product.images);
             const image = images && images.length > 0 ? images[0] : '';
-            // Ensure absolute URL if needed, but Stripe handles full URLs
-            // Stripe requires valid URLs. If using local images, they might not render in Stripe Checkout in dev.
 
             lineItems.push({
                 price_data: {
                     currency: 'usd',
                     product_data: {
                         name: product.name,
-                        images: image.startsWith('http') ? [image] : [], // Only pass absolute URLs to avoid Stripe errors
+                        images: image.startsWith('http') ? [image] : [],
+                        metadata: {
+                            productId: product.id
+                        }
                     },
                     unit_amount: Math.round(product.price * 100),
                 },
@@ -60,18 +76,22 @@ export async function POST(request: Request) {
             });
         }
 
-        const session = await stripe.checkout.sessions.create({
+        const stripeSession = await stripe.checkout.sessions.create({
             payment_method_types: ['card'],
             line_items: lineItems,
             mode: 'payment',
             success_url: `${request.headers.get('origin')}/checkout/success?session_id={CHECKOUT_SESSION_ID}`,
             cancel_url: `${request.headers.get('origin')}/checkout/cancel`,
+            client_reference_id: session.user.id,
             metadata: {
-                // Add any metadata you need here, e.g. order ID, user ID
+                // Additional global metadata if needed
             },
+            shipping_address_collection: {
+                allowed_countries: ['US', 'CA', 'GB'],
+            }
         });
 
-        return NextResponse.json({ sessionId: session.id, url: session.url });
+        return NextResponse.json({ sessionId: stripeSession.id, url: stripeSession.url });
     } catch (error: any) {
         console.error('Stripe Checkout Error:', error);
         return NextResponse.json(
