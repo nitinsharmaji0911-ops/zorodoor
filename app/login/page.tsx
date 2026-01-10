@@ -6,31 +6,33 @@ import { useRouter } from "next/navigation";
 import Button from "@/components/ui/Button";
 import Input from "@/components/ui/Input";
 import { useToast } from "@/components/ui/Toast";
+import { authenticate } from "@/app/actions/auth";
 
 export default function LoginPage() {
     const router = useRouter();
     const { showToast } = useToast();
-    const [formData, setFormData] = useState({
-        email: "",
-        password: "",
-    });
     const [isLoading, setIsLoading] = useState(false);
 
-    const handleSubmit = async (e: React.FormEvent) => {
+    const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         setIsLoading(true);
 
-        // Mock Login Logic
-        setTimeout(() => {
-            if (formData.email && formData.password) {
-                localStorage.setItem("user_token", "mock-token");
-                showToast("Welcome back!", "success");
-                router.push("/account");
-            } else {
+        const formData = new FormData(e.currentTarget);
+
+        try {
+            const result = await authenticate(undefined, formData);
+            if (result === 'Invalid credentials.') {
                 showToast("Invalid credentials", "error");
+            } else {
+                showToast("Welcome back!", "success");
+                // Force refresh to update session state
+                window.location.href = "/account";
             }
+        } catch (error) {
+            showToast("Something went wrong", "error");
+        } finally {
             setIsLoading(false);
-        }, 1000);
+        }
     };
 
     return (
@@ -45,9 +47,8 @@ export default function LoginPage() {
                     <div>
                         <label className="block text-sm font-medium text-[--color-text-secondary] mb-1">Email</label>
                         <Input
+                            name="email"
                             type="email"
-                            value={formData.email}
-                            onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                             placeholder="Enter your email"
                             required
                         />
@@ -56,9 +57,8 @@ export default function LoginPage() {
                     <div>
                         <label className="block text-sm font-medium text-[--color-text-secondary] mb-1">Password</label>
                         <Input
+                            name="password"
                             type="password"
-                            value={formData.password}
-                            onChange={(e) => setFormData({ ...formData, password: e.target.value })}
                             placeholder="Enter your password"
                             required
                         />

@@ -33,20 +33,38 @@ export default function CheckoutPage() {
         e.preventDefault();
         setIsProcessing(true);
 
-        // Simulate payment processing
-        await new Promise(resolve => setTimeout(resolve, 2000));
+        try {
+            const response = await fetch('/api/checkout', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ items }),
+            });
 
-        // Create new order record
-        addOrder({
-            id: `ORD-${Date.now().toString().slice(-6)}`,
-            date: new Date().toISOString(),
-            status: "processing",
-            total: total,
-            items: itemCount
-        });
+            const data = await response.json();
 
-        clearCart();
-        router.push("/checkout/success");
+            if (data.url) {
+                // Create new order record locally before redirecting (optional, or rely on webhook)
+                addOrder({
+                    id: `ORD-${Date.now().toString().slice(-6)}`,
+                    date: new Date().toISOString(),
+                    status: "processing",
+                    total: total,
+                    items: itemCount
+                });
+                clearCart();
+                window.location.href = data.url;
+            } else {
+                console.error('Checkout failed:', data.error);
+                alert('Checkout failed. Please try again.');
+                setIsProcessing(false);
+            }
+        } catch (error) {
+            console.error('Error:', error);
+            setIsProcessing(false);
+            alert('An unexpected error occurred.');
+        }
     };
 
     return (

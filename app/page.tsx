@@ -1,134 +1,36 @@
-"use client";
-
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight, Star } from "lucide-react";
 import Button from "@/components/ui/Button";
 import ProductCard from "@/components/products/ProductCard";
+import { prisma } from "@/lib/prisma";
+import { Product } from "@prisma/client";
 
-// Real Data with Correct Paths
-const featuredProducts = [
-  {
-    id: "1",
-    name: "UNTITLED. Heavyweight Hoodie",
-    slug: "untitled-heavyweight-hoodie",
-    price: 120.00,
-    images: ["/products/untitled_hoodie.png"],
-    category: "Hoodies",
-    isNew: true,
-    inStock: true,
-    description: "Minimalist perfection. 500gsm heavyweight cotton for the ultimate drape.",
-    sizes: ["S", "M", "L", "XL", "XXL"],
-    rating: 4.8,
-    reviewCount: 42
-  },
-  {
-    id: "2",
-    name: "Priest 'Age' Graphic Hoodie",
-    slug: "priest-age-graphic-hoodie",
-    price: 110.00,
-    images: ["/products/priest_hoodie_front.png", "/products/priest_hoodie_graphic.png"],
-    category: "Hoodies",
-    isNew: true,
-    inStock: true,
-    description: "Provocative design meeting premium comfort. Puff print text on front, high-detail graphic on back.",
-    sizes: ["S", "M", "L", "XL"],
-    rating: 4.9,
-    reviewCount: 18
-  },
-  {
-    id: "3",
-    name: "Zero Fucks Oversized Tee",
-    slug: "zero-fucks-oversized-tee",
-    price: 65.00,
-    images: ["/products/zero_fucks_tshirt.png"],
-    category: "T-Shirts",
-    isNew: false,
-    inStock: true,
-    description: "Statement piece. Boxy fit, drop shoulders, 280gsm cotton.",
-    sizes: ["S", "M", "L", "XL"],
-    rating: 4.7,
-    reviewCount: 156
-  },
-  {
-    id: "4",
-    name: "Just Chilling Palm Tee",
-    slug: "just-chilling-palm-tee",
-    price: 65.00,
-    images: ["/products/just_chilling_tshirt.png"],
-    category: "T-Shirts",
-    isNew: true,
-    inStock: true,
-    description: "Laid back vibes only. Contrast white puff print on deep black cotton.",
-    sizes: ["M", "L", "XL", "XXL"],
-    rating: 4.6,
-    reviewCount: 89
-  },
-  {
-    id: "5",
-    name: "BlueLoc Oversized Hoodie",
-    slug: "blueloc-oversized-hoodie",
-    price: 99.99,
-    images: ["/products/blueloc_hoodie_front_1767604938655.png", "/products/blueloc_hoodie_back_1767604957835.png"],
-    category: "Hoodies",
-    isNew: false,
-    inStock: true,
-    description: "Premium heavyweight cotton hoodie featuring exclusive BlueLoc artwork. Oversized fit for maximum comfort.",
-    sizes: ["XS", "S", "M", "L", "XL"],
-    rating: 4.5,
-    reviewCount: 124
-  },
-  {
-    id: "6",
-    name: "Demon Slayer Hoodie",
-    slug: "demon-slayer-hoodie",
-    price: 109.99,
-    images: ["/products/demon_slayer_hoodie_1767604977764.png"],
-    category: "Hoodies",
-    isNew: false,
-    inStock: true,
-    description: "High-quality puff print featuring Nezuko. 450 GSM French Terry cotton.",
-    sizes: ["S", "M", "L", "XL"],
-    rating: 4.8,
-    reviewCount: 89
-  },
-  {
-    id: "7",
-    name: "Goku Dragon Oversized T-Shirt",
-    slug: "goku-dragon-element-tee",
-    price: 64.99,
-    images: ["/products/goku_tshirt_front_1767605011952.png"],
-    category: "T-Shirts",
-    isNew: false,
-    inStock: false,
-    description: "Vintage wash tee with detailed dragon ball print. Boxy fit.",
-    sizes: ["M", "L", "XL", "XXL"],
-    rating: 4.6,
-    reviewCount: 56
-  },
-  {
-    id: "8",
-    name: "Berserk Oversized T-Shirt",
-    slug: "berserk-oversized-tee",
-    price: 59.99,
-    images: ["/products/berserk_tshirt_front_1767604993809.png"],
-    category: "T-Shirts",
-    isNew: false,
-    inStock: true,
-    description: "Guts graphic on heavyweight charcoal tee. Distressed finish.",
-    sizes: ["XS", "S", "M", "L", "XL"],
-    rating: 4.7,
-    reviewCount: 210
-  }
-];
+async function getFeaturedProducts() {
+  const products = await prisma.product.findMany({
+    where: {
+      featured: true,
+    },
+    take: 8,
+    orderBy: { createdAt: 'desc' }
+  });
+
+  return products.map((product) => ({
+    ...product,
+    images: JSON.parse(product.images) as string[],
+    sizes: JSON.parse(product.sizes) as string[],
+    features: JSON.parse(product.features) as string[]
+  }));
+}
 
 const categories = [
-  { name: "Hoodies", image: "/products/untitled_hoodie.png", href: "/shop?category=hoodies" },
-  { name: "T-Shirts", image: "/products/zero_fucks_tshirt.png", href: "/shop?category=t-shirts" },
-  { name: "Lower", image: "/products/untitled_hoodie.png", href: "/shop?category=lower" },
+  { name: "Hoodies", image: "/products/untitled_hoodie.png", href: "/shop?category=Hoodies" },
+  { name: "T-Shirts", image: "/products/zero_fucks_tshirt.png", href: "/shop?category=T-Shirts" },
+  { name: "Lower", image: "/products/untitled_hoodie.png", href: "/shop?category=Lower" },
 ];
 
-export default function Home() {
+export default async function Home() {
+  const featuredProducts = await getFeaturedProducts();
   return (
     <div className="flex flex-col min-h-screen">
       {/* Cinematic Hero Section */}

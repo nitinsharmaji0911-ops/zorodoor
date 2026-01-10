@@ -7,34 +7,40 @@ import Button from "@/components/ui/Button";
 import Input from "@/components/ui/Input";
 import { useToast } from "@/components/ui/Toast";
 
+import { register } from "@/app/actions/auth";
+
 export default function RegisterPage() {
     const router = useRouter();
     const { showToast } = useToast();
-    const [formData, setFormData] = useState({
-        name: "",
-        email: "",
-        password: "",
-        confirmPassword: ""
-    });
     const [isLoading, setIsLoading] = useState(false);
 
-    const handleSubmit = async (e: React.FormEvent) => {
+    const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
 
-        if (formData.password !== formData.confirmPassword) {
+        const formData = new FormData(e.currentTarget);
+        const password = formData.get("password") as string;
+        const confirmPassword = formData.get("confirmPassword") as string;
+
+        if (password !== confirmPassword) {
             showToast("Passwords do not match", "error");
             return;
         }
 
         setIsLoading(true);
 
-        // Mock Register Logic
-        setTimeout(() => {
-            localStorage.setItem("user_token", "mock-token");
-            showToast("Account created successfully!", "success");
-            router.push("/account");
+        try {
+            const result = await register(undefined, formData);
+            if (result === "Success") {
+                showToast("Account created successfully!", "success");
+                router.push("/login"); // Redirect to login after registration
+            } else {
+                showToast(result || "Failed to register", "error");
+            }
+        } catch (error) {
+            showToast("An unexpected error occurred", "error");
+        } finally {
             setIsLoading(false);
-        }, 1000);
+        }
     };
 
     return (
@@ -49,8 +55,7 @@ export default function RegisterPage() {
                     <div>
                         <label className="block text-sm font-medium text-[--color-text-secondary] mb-1">Full Name</label>
                         <Input
-                            value={formData.name}
-                            onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                            name="name"
                             placeholder="Enter your name"
                             required
                         />
@@ -59,9 +64,8 @@ export default function RegisterPage() {
                     <div>
                         <label className="block text-sm font-medium text-[--color-text-secondary] mb-1">Email</label>
                         <Input
+                            name="email"
                             type="email"
-                            value={formData.email}
-                            onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                             placeholder="Enter your email"
                             required
                         />
@@ -70,9 +74,8 @@ export default function RegisterPage() {
                     <div>
                         <label className="block text-sm font-medium text-[--color-text-secondary] mb-1">Password</label>
                         <Input
+                            name="password"
                             type="password"
-                            value={formData.password}
-                            onChange={(e) => setFormData({ ...formData, password: e.target.value })}
                             placeholder="Create a password"
                             required
                         />
@@ -81,9 +84,8 @@ export default function RegisterPage() {
                     <div>
                         <label className="block text-sm font-medium text-[--color-text-secondary] mb-1">Confirm Password</label>
                         <Input
+                            name="confirmPassword"
                             type="password"
-                            value={formData.confirmPassword}
-                            onChange={(e) => setFormData({ ...formData, confirmPassword: e.target.value })}
                             placeholder="Confirm your password"
                             required
                         />

@@ -10,11 +10,18 @@ import { useRouter } from "next/navigation";
 export default function ProfilePage() {
     const { user, isAuthenticated, logout, orders, login } = useUser();
     const router = useRouter();
-    const [activeTab, setActiveTab] = useState<"profile" | "orders">("profile");
+    const [activeTab, setActiveTab] = useState<"profile" | "orders" | "addresses">("profile");
 
     // Login State
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+
+    // Mock Addresses State
+    const [addresses, setAddresses] = useState([
+        { id: 1, type: "Home", address: "123 Street Name", city: "City", state: "State", zip: "12345", default: true },
+        { id: 2, type: "Work", address: "456 Office Plaza", city: "Work City", state: "State", zip: "67890", default: false }
+    ]);
+    const [isAddressModalOpen, setIsAddressModalOpen] = useState(false);
 
     if (!isAuthenticated) {
         return (
@@ -82,18 +89,28 @@ export default function ProfilePage() {
                         <button
                             onClick={() => setActiveTab("profile")}
                             className={`w-full flex items-center gap-3 px-4 py-3 rounded-md transition-colors ${activeTab === "profile"
-                                    ? "bg-[--color-accent-cyan] text-black font-semibold"
-                                    : "text-[--color-text-secondary] hover:bg-[--color-bg-secondary] hover:text-[--color-text-primary]"
+                                ? "bg-[--color-accent-cyan] text-black font-semibold"
+                                : "text-[--color-text-secondary] hover:bg-[--color-bg-secondary] hover:text-[--color-text-primary]"
                                 }`}
                         >
                             <UserIcon size={20} />
                             Profile Details
                         </button>
                         <button
+                            onClick={() => setActiveTab("addresses")}
+                            className={`w-full flex items-center gap-3 px-4 py-3 rounded-md transition-colors ${activeTab === "addresses"
+                                ? "bg-[--color-accent-cyan] text-black font-semibold"
+                                : "text-[--color-text-secondary] hover:bg-[--color-bg-secondary] hover:text-[--color-text-primary]"
+                                }`}
+                        >
+                            <MapPin size={20} />
+                            Saved Addresses
+                        </button>
+                        <button
                             onClick={() => setActiveTab("orders")}
                             className={`w-full flex items-center gap-3 px-4 py-3 rounded-md transition-colors ${activeTab === "orders"
-                                    ? "bg-[--color-accent-cyan] text-black font-semibold"
-                                    : "text-[--color-text-secondary] hover:bg-[--color-bg-secondary] hover:text-[--color-text-primary]"
+                                ? "bg-[--color-accent-cyan] text-black font-semibold"
+                                : "text-[--color-text-secondary] hover:bg-[--color-bg-secondary] hover:text-[--color-text-primary]"
                                 }`}
                         >
                             <Package size={20} />
@@ -140,20 +157,42 @@ export default function ProfilePage() {
                                         {user?.email}
                                     </div>
                                 </div>
+                            </div>
+                        </div>
+                    )}
 
-                                <hr className="border-[--color-border]" />
+                    {activeTab === "addresses" && (
+                        <div className="bg-[--color-bg-secondary] rounded-lg border border-[--color-border] p-6 lg:p-8">
+                            <div className="flex justify-between items-center mb-6">
+                                <h2 className="text-2xl font-bold text-[--color-text-primary]">Saved Addresses</h2>
+                                <Button variant="primary" size="sm" onClick={() => setIsAddressModalOpen(true)}>
+                                    + Add New Address
+                                </Button>
+                            </div>
 
-                                <div className="flex items-start gap-4">
-                                    <MapPin className="text-[--color-accent-cyan] mt-1" />
-                                    <div>
-                                        <h3 className="text-lg font-semibold text-[--color-text-primary]">Shipping Address</h3>
-                                        <p className="text-[--color-text-secondary]">
-                                            {user?.address}<br />
-                                            {user?.city}, {user?.state} {user?.zipCode}<br />
-                                            {user?.country}
-                                        </p>
+                            <div className="space-y-4">
+                                {addresses.map((addr) => (
+                                    <div key={addr.id} className="p-4 border border-[--color-border] rounded-lg bg-[--color-bg-primary] flex justify-between items-start">
+                                        <div>
+                                            <div className="flex items-center gap-2 mb-2">
+                                                <span className="font-semibold text-[--color-text-primary]">{addr.type}</span>
+                                                {addr.default && (
+                                                    <span className="text-xs bg-[--color-accent-cyan] text-black px-2 py-0.5 rounded-full font-medium">Default</span>
+                                                )}
+                                            </div>
+                                            <p className="text-sm text-[--color-text-secondary]">
+                                                {addr.address}<br />
+                                                {addr.city}, {addr.state} {addr.zip}
+                                            </p>
+                                        </div>
+                                        <div className="flex gap-2">
+                                            <button className="text-sm text-[--color-text-secondary] hover:text-[--color-accent-cyan]">Edit</button>
+                                            {!addr.default && (
+                                                <button className="text-sm text-red-500 hover:text-red-400">Delete</button>
+                                            )}
+                                        </div>
                                     </div>
-                                </div>
+                                ))}
                             </div>
                         </div>
                     )}

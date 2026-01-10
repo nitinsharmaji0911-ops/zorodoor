@@ -8,4 +8,3 @@ git push -u origin main
 3. Set the build command to `npm run build`
 4. Set the start command to `npm run start`
 5. Deploy the project
-
