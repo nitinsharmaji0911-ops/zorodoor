@@ -5,7 +5,8 @@
     /* Premium Color Palette - Strict Adherence */
     --color-bg-primary: #F5F2ED;
     /* Warm Cream */
-    --color-bg-secondary: #EBE7E0;
+    --color-bg-secondary: #ffffff;
+    /* Was F5F5F7 or similar, ensuring it matches the card background for the separator to work */
     /* Slightly darker cream for cards/sections */
     --color-bg-white: #FFFFFF;
     /* Pure White for clean contrast */
