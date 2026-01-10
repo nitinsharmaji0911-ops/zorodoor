@@ -1,24 +1,12 @@
 import { NextResponse } from 'next/server';
-import { createClient } from '@supabase/supabase-js';
+import { writeFile, mkdir } from 'fs/promises';
+import path from 'path';
 
 export const runtime = 'nodejs';
 export const dynamic = 'force-dynamic';
 
 export async function POST(request: Request) {
     try {
-        // Check if Supabase is configured
-        if (!process.env.NEXT_PUBLIC_SUPABASE_URL || !process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY) {
-            return NextResponse.json(
-                { error: 'Supabase not configured' },
-                { status: 500 }
-            );
-        }
-
-        const supabase = createClient(
-            process.env.NEXT_PUBLIC_SUPABASE_URL,
-            process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
-        );
-
         const formData = await request.formData();
         const file = formData.get('file') as File;
 
@@ -31,29 +19,22 @@ export async function POST(request: Request) {
 
         // Create unique filename
         const filename = `${Date.now()}-${file.name.replace(/[^a-zA-Z0-9.-]/g, '_')}`;
-        const filepath = `products/${filename}`;
+        const uploadDir = path.join(process.cwd(), 'public', 'uploads');
 
-        // Upload to Supabase Storage
-        const { data, error } = await supabase.storage
-            .from('product-images')
-            .upload(filepath, buffer, {
-                contentType: file.type,
-                upsert: false
-            });
-
-        if (error) {
-            console.error('Supabase upload error:', error);
-            return NextResponse.json({ error: error.message }, { status: 500 });
+        // Ensure the uploads directory exists
+        try {
+            await mkdir(uploadDir, { recursive: true });
+        } catch (error) {
+            // Directory might already exist
         }
 
-        // Get public URL
-        const { data: urlData } = supabase.storage
-            .from('product-images')
-            .getPublicUrl(filepath);
+        const filepath = path.join(uploadDir, filename);
+
+        await writeFile(filepath, buffer);
 
         return NextResponse.json({
             message: 'Upload success',
-            url: urlData.publicUrl
+            url: `/uploads/${filename}`
         });
     } catch (error: any) {
         console.error('Upload error:', error);
