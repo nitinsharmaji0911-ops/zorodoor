@@ -40,9 +40,9 @@ export async function createProduct(formData: FormData) {
                 price,
                 stock,
                 category,
-                images: JSON.stringify(images),
-                sizes: JSON.stringify(sizes),
-                features: JSON.stringify(features),
+                images: images,
+                sizes: sizes,
+                features: features,
                 rating: 5,
                 reviewCount: 0,
                 inStock: stock > 0

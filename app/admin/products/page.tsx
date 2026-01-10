@@ -47,7 +47,8 @@ export default async function AdminProductsPage() {
                                 </tr>
                             ) : (
                                 products.map((product) => {
-                                    const images = JSON.parse(product.images);
+                                    // Postgres returns string[], no JSON.parse needed
+                                    const images = product.images;
                                     return (
                                         <tr key={product.id} className="hover:bg-[#F5F2ED]/50 transition-colors">
                                             <td className="p-4">
@@ -66,8 +67,8 @@ export default async function AdminProductsPage() {
                                             <td className="p-4 font-bold text-[#2C2420]">${product.price.toFixed(2)}</td>
                                             <td className="p-4">
                                                 <span className={`px-2 py-1 rounded-full text-xs font-bold ${product.stock > 10 ? 'bg-green-100 text-green-700' :
-                                                        product.stock > 0 ? 'bg-yellow-100 text-yellow-700' :
-                                                            'bg-red-100 text-red-700'
+                                                    product.stock > 0 ? 'bg-yellow-100 text-yellow-700' :
+                                                        'bg-red-100 text-red-700'
                                                     }`}>
                                                     {product.stock} in stock
                                                 </span>

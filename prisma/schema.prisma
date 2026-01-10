@@ -3,8 +3,8 @@ generator client {
 }
 
 datasource db {
-  provider = "sqlite"
-  url      = "file:./dev.db"
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
 }
 
 model User {
@@ -29,10 +29,10 @@ model Product {
   slug        String   @unique
   description String
   price       Float
-  images      String // SQLite doesn't strictly support scalar lists, using JSON string
+  images      String[]
   category    String
-  sizes       String // JSON string
-  features    String // JSON string
+  sizes       String[]
+  features    String[]
   rating      Float    @default(0)
   reviewCount Int      @default(0)
   inStock     Boolean  @default(true)

@@ -13,12 +13,7 @@ async function getProduct(slug: string) {
 
     if (!product) return null;
 
-    return {
-        ...product,
-        images: JSON.parse(product.images),
-        sizes: JSON.parse(product.sizes),
-        features: JSON.parse(product.features)
-    };
+    return product;
 }
 
 async function getRelatedProducts(category: string, currentProductId: string) {
@@ -30,12 +25,7 @@ async function getRelatedProducts(category: string, currentProductId: string) {
         take: 4
     });
 
-    return products.map(p => ({
-        ...p,
-        images: JSON.parse(p.images),
-        sizes: JSON.parse(p.sizes),
-        features: JSON.parse(p.features)
-    }));
+    return products;
 }
 
 export default async function ProductDetail({ params }: { params: Promise<{ slug: string }> }) {

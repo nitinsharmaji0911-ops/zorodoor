@@ -15,12 +15,7 @@ async function getFeaturedProducts() {
     orderBy: { createdAt: 'desc' }
   });
 
-  return products.map((product) => ({
-    ...product,
-    images: JSON.parse(product.images) as string[],
-    sizes: JSON.parse(product.sizes) as string[],
-    features: JSON.parse(product.features) as string[]
-  }));
+  return products;
 }
 
 const categories = [

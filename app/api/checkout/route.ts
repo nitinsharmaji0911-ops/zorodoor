@@ -57,7 +57,8 @@ export async function POST(request: Request) {
             }
 
             // Parse images to get the first one for Stripe
-            const images = JSON.parse(product.images);
+            // Postgres returns string[], no JSON.parse needed
+            const images = product.images;
             const image = images && images.length > 0 ? images[0] : '';
 
             lineItems.push({
