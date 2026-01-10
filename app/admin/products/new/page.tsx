@@ -5,7 +5,6 @@ import Button from "@/components/ui/Button";
 import { ArrowLeft, Upload, X } from "lucide-react";
 import Link from "next/link";
 import { useState } from "react";
-import { supabase } from "@/lib/supabase";
 import Image from "next/image";
 
 export default function AddProductPage() {
@@ -20,22 +19,21 @@ export default function AddProductPage() {
             }
 
             const file = e.target.files[0];
-            const fileExt = file.name.split(".").pop();
-            const fileName = `${Math.random()}.${fileExt}`;
-            const filePath = `${fileName}`;
+            const formData = new FormData();
+            formData.append('file', file);
 
-            const { error: uploadError } = await supabase.storage
-                .from("products")
-                .upload(filePath, file);
+            const response = await fetch('/api/upload', {
+                method: 'POST',
+                body: formData,
+            });
 
-            if (uploadError) {
-                throw uploadError;
+            if (!response.ok) {
+                const error = await response.json();
+                throw new Error(error.error || 'Upload failed');
             }
 
-            // Get Public URL
-            const { data } = supabase.storage.from("products").getPublicUrl(filePath);
-
-            setImageUrl(data.publicUrl);
+            const data = await response.json();
+            setImageUrl(data.url);
         } catch (error: any) {
             alert("Error uploading image: " + error.message);
         } finally {
