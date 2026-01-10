@@ -32,19 +32,18 @@ export const metadata: Metadata = {
     title: "Zorodoor - Premium Anime Streetwear",
     description: "Brutal self-expression through streetwear. Shop premium oversized hoodies and tees.",
     siteName: "Zorodoor",
-    images: [{
-      url: "/og-image.jpg", // We need to make sure this exists or user adds it
-      width: 1200,
-      height: 630,
-      alt: "Zorodoor Streetwear Collection",
-    }],
-  },
+    url: "/products/untitled_hoodie.png",
+    width: 1200,
+    height: 630,
+    alt: "Zorodoor Streetwear Collection",
+  }],
+},
   twitter: {
     card: "summary_large_image",
     title: "Zorodoor - Premium Anime Streetwear",
     description: "Brutal self-expression through streetwear. Shop premium oversized hoodies and tees.",
     creator: "@zorodoor",
-    images: ["/og-image.jpg"],
+    images: ["/products/untitled_hoodie.png"],
   },
   robots: {
     index: true,

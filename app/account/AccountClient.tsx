@@ -53,16 +53,7 @@ export default function AccountClient({ orders: serverOrders, userSession }: Acc
                             <UserIcon size={20} />
                             Profile Details
                         </button>
-                        <button
-                            onClick={() => setActiveTab("addresses")}
-                            className={`w-full flex items-center gap-3 px-4 py-3 rounded-md transition-colors ${activeTab === "addresses"
-                                ? "bg-[--color-accent-cyan] text-black font-semibold"
-                                : "text-[--color-text-secondary] hover:bg-[--color-bg-secondary] hover:text-[--color-text-primary]"
-                                }`}
-                        >
-                            <MapPin size={20} />
-                            Saved Addresses
-                        </button>
+                        {/* Saved Addresses Tab Removed for V1 */}
                         <button
                             onClick={() => setActiveTab("orders")}
                             className={`w-full flex items-center gap-3 px-4 py-3 rounded-md transition-colors ${activeTab === "orders"
@@ -109,31 +100,7 @@ export default function AccountClient({ orders: serverOrders, userSession }: Acc
                         </div>
                     )}
 
-                    {activeTab === "addresses" && (
-                        <div className="bg-[--color-bg-secondary] rounded-lg border border-[--color-border] p-6 lg:p-8">
-                            <div className="flex justify-between items-center mb-6">
-                                <h2 className="text-2xl font-bold text-[--color-text-primary]">Saved Addresses</h2>
-                                <Button variant="primary" size="sm" onClick={() => setIsAddressModalOpen(true)}>
-                                    + Add New Address
-                                </Button>
-                            </div>
-                            <div className="space-y-4">
-                                {addresses.map((addr) => (
-                                    <div key={addr.id} className="p-4 border border-[--color-border] rounded-lg bg-[--color-bg-primary] flex justify-between items-start">
-                                        <div>
-                                            <div className="flex items-center gap-2 mb-2">
-                                                <span className="font-semibold text-[--color-text-primary]">{addr.type}</span>
-                                                {addr.default && (
-                                                    <span className="text-xs bg-[--color-accent-cyan] text-black px-2 py-0.5 rounded-full font-medium">Default</span>
-                                                )}
-                                            </div>
-                                            <p className="text-sm text-[--color-text-secondary]">{addr.address}, {addr.city}</p>
-                                        </div>
-                                    </div>
-                                ))}
-                            </div>
-                        </div>
-                    )}
+
 
                     {activeTab === "orders" && (
                         <div className="space-y-4">
