@@ -47,6 +47,31 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
                 return null;
             },
         }),
+        // Google Provider (OAuth)
+        {
+            id: "google",
+            name: "Google",
+            type: "oauth",
+            clientId: process.env.GOOGLE_CLIENT_ID,
+            clientSecret: process.env.GOOGLE_CLIENT_SECRET,
+            authorization: {
+                params: {
+                    prompt: "consent",
+                    access_type: "offline",
+                    response_type: "code"
+                }
+            },
+            // Mapping profile to user schema
+            profile(profile: any) {
+                return {
+                    id: profile.sub,
+                    name: profile.name,
+                    email: profile.email,
+                    image: profile.picture,
+                    role: "USER", // Default role
+                }
+            }
+        },
     ],
     callbacks: {
         async jwt({ token, user, trigger, session }) {
