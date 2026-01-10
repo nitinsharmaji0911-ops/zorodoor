@@ -50,7 +50,8 @@ export async function createProduct(formData: FormData) {
         });
     } catch (e) {
         console.error("Failed to create product", e);
-        return { error: "Failed to create product" };
+        // Redirect with error query param instead of returning
+        redirect("/admin/products?error=create_failed");
     }
 
     revalidatePath("/admin/products");

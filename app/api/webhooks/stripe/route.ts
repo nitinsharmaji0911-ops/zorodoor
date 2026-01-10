@@ -3,13 +3,15 @@ import { headers } from "next/headers";
 import Stripe from "stripe";
 import { prisma } from "@/lib/prisma";
 
-const stripe = new Stripe(process.env.STRIPE_SECRET_KEY || "", {
-    apiVersion: "2024-12-18.acacia" as any,
-});
-
-const endpointSecret = process.env.STRIPE_WEBHOOK_SECRET || "";
+export const runtime = 'nodejs';
+export const dynamic = 'force-dynamic';
 
 export async function POST(req: Request) {
+    const stripe = new Stripe(process.env.STRIPE_SECRET_KEY || "", {
+        apiVersion: "2024-12-18.acacia" as any,
+    });
+    const endpointSecret = process.env.STRIPE_WEBHOOK_SECRET || "";
+
     if (!process.env.STRIPE_SECRET_KEY || !endpointSecret) {
         console.warn("Stripe keys missing for webhook.");
         return NextResponse.json({ error: "Missing keys" }, { status: 500 });
