@@ -94,16 +94,16 @@ export async function POST(req: Request) {
         });
         const finalItems = sessionWithProductParams.line_items?.data || [];
 
-        await prisma.$transaction(async (tx) => {
+        await prisma.$transaction(async (tx: any) => {
             const order = await tx.order.create({
                 data: {
                     stripeSessionId: session.id,
                     userId: userId || "",
                     total: session.amount_total ? session.amount_total / 100 : 0,
                     status: "PAID",
-                    address: JSON.stringify(session.shipping_details || {}),
+                    address: JSON.stringify((session as any).shipping_details || {}),
                     items: {
-                        create: finalItems.map((item) => {
+                        create: finalItems.map((item: any) => {
                             const product = item.price?.product as Stripe.Product;
                             const internalProductId = product.metadata.productId;
 
