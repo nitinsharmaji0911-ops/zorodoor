@@ -49,7 +49,7 @@ export default function CheckoutPage() {
                 addOrder({
                     id: `ORD-${Date.now().toString().slice(-6)}`,
                     date: new Date().toISOString(),
-                    status: "processing",
+                    status: "PENDING",
                     total: total,
                     items: itemCount
                 });
