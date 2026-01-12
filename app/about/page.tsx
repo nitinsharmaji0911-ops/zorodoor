@@ -8,7 +8,7 @@ export default function AboutPage() {
             </h1>
             <div className="prose prose-invert max-w-none text-[--color-text-secondary]">
                 <p className="mb-6 text-xl text-center font-medium text-[--color-text-primary]">
-                    "We are a premium e-commerce brand dedicated to delivering quality products and exceptional customer service."
+                    &quot;We are a premium e-commerce brand dedicated to delivering quality products and exceptional customer service.&quot;
                 </p>
 
                 <hr className="my-8 border-[--color-border]" />

@@ -45,14 +45,7 @@ export default function CheckoutPage() {
             const data = await response.json();
 
             if (data.url) {
-                // Create new order record locally before redirecting (optional, or rely on webhook)
-                addOrder({
-                    id: `ORD-${Date.now().toString().slice(-6)}`,
-                    date: new Date().toISOString(),
-                    status: "PENDING",
-                    total: total,
-                    items: itemCount
-                });
+                // Order will be created server-side
                 clearCart();
                 window.location.href = data.url;
             } else {

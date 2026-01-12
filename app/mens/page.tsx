@@ -2,9 +2,7 @@
 
 import React, { useEffect, useState } from "react";
 import Image from "next/image";
-import Link from "next/link";
-import { ArrowRight, Zap } from "lucide-react";
-import Button from "@/components/ui/Button";
+import { Zap } from "lucide-react";
 import ProductCard from "@/components/products/ProductCard";
 import { Product } from "@prisma/client";
 
