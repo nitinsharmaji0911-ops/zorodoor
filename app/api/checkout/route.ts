@@ -84,7 +84,7 @@ export async function POST(request: Request) {
                             create: items.map((item: any) => ({
                                 productId: item.productId,
                                 quantity: item.quantity,
-                                price: lineItems.find((li: any) => li.price_data.product_data.metadata.productId === item.productId)?.price_data.unit_amount! / 100 || 0
+                                price: lineItems.find((li: any) => li.price_data?.product_data?.metadata?.productId === item.productId)?.price_data?.unit_amount ?? 0 / 100
                             }))
                         }
                     }
