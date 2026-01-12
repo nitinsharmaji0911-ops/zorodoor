@@ -1,140 +1,169 @@
+"use client";
+
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowRight, Star } from "lucide-react";
-import Button from "@/components/ui/Button";
-import ProductCard from "@/components/products/ProductCard";
-import { prisma } from "@/lib/prisma";
-import { Product } from "@prisma/client";
+import { ArrowRight, Star, Sparkles, Zap, Crown } from "lucide-react";
+import { useTheme } from "next-themes";
+import { useState, useEffect } from "react";
 
-export const dynamic = 'force-dynamic';
-
-async function getFeaturedProducts() {
-  const products = await prisma.product.findMany({
-    where: {
-      featured: true,
-    },
-    take: 8,
-    orderBy: { createdAt: 'desc' }
-  });
-
-  return products;
-}
-
+// Featured Categories Data
 const categories = [
-  { name: "Hoodies", image: "/products/untitled_hoodie.png", href: "/shop?category=Hoodies" },
-  { name: "T-Shirts", image: "/products/zero_fucks_tshirt.png", href: "/shop?category=T-Shirts" },
-  { name: "Lower", image: "/products/untitled_hoodie.png", href: "/shop?category=Lower" },
+  {
+    id: "hoodies",
+    name: "Hoodies",
+    image: "/products/untitled_hoodie.png",
+    link: "/shop?category=hoodies",
+  },
+  {
+    id: "t-shirts",
+    name: "T-Shirts",
+    image: "/products/1767619612741-t-shirt_1.png",
+    link: "/shop?category=t-shirts",
+  },
+  {
+    id: "premium",
+    name: "Premium",
+    image: "/products/demon_slayer_hoodie_1767604977764.png",
+    link: "/shop?category=premium",
+  },
 ];
 
-export default async function Home() {
-  const featuredProducts = await getFeaturedProducts();
+export default function Home() {
+  const { theme } = useTheme();
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
   return (
-    <div className="flex flex-col min-h-screen">
-      {/* Cinematic Hero Section */}
-      {/* Cinematic Hero Section - Premium Minimalist */}
-      <section className="relative w-full h-[90vh] min-h-[700px] flex items-center justify-center overflow-hidden bg-[#F5F2ED] pt-20">
+    <main className="min-h-screen bg-[#F5F2ED] dark:bg-black transition-colors duration-300">
 
-        {/* Abstract Background Texture (Subtle Noise) */}
-        <div className="absolute inset-0 z-0 opacity-[0.05] bg-[url('/noise.png')] mix-blend-overlay pointer-events-none"></div>
-
-        {/* CENTER: Abstract "Spirit of the Court" Graphic */}
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-0 pointer-events-none select-none">
-          {/* Soft, Warm Glow (Premium Streetwear Vibe) */}
-          <div className="w-[600px] h-[600px] md:w-[900px] md:h-[900px] rounded-full bg-gradient-to-tr from-[#E65100]/10 via-[#8B7355]/5 to-transparent blur-[100px] animate-pulse-slow"></div>
-          {/* Subtle Ring (Minimalist Basketball Reference) */}
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[550px] h-[550px] md:w-[750px] md:h-[750px] rounded-full border border-[#2C2420]/5 opacity-60"></div>
+      {/* 1. HERO SECTION - Premium & Clean */}
+      <section className="relative h-screen w-full overflow-hidden flex items-center justify-center">
+        {/* Background Image */}
+        <div className="absolute inset-0 z-0">
+          <Image
+            src="/hero/premium_hero.png"
+            alt="Premium Streetwear"
+            fill
+            className="object-cover object-center"
+            priority
+            quality={100}
+          />
+          {/* Subtle Overlay for Text Readability */}
+          <div className="absolute inset-0 bg-black/20" />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-80" />
         </div>
 
-        {/* CENTER CONTENT */}
-        <div className="relative z-20 text-center max-w-5xl px-6 space-y-10 animate-fade-in-up mt-[-30px]">
-          <div className="inline-flex items-center gap-2 px-5 py-2 rounded-full bg-[#EBE7E0]/50 backdrop-blur-md border border-[#E8E2D8] mb-4">
-            <Star size={12} className="text-[#8B7355] fill-[#8B7355]" />
-            <span className="text-[10px] md:text-xs font-black tracking-[0.2em] uppercase text-[#6B5E52]">Premium Anime Streetwear</span>
+        {/* Hero Content */}
+        <div className="relative z-10 text-center px-4 w-full max-w-7xl mx-auto flex flex-col items-center justify-end h-full pb-24 md:pb-32">
+
+          <div className="animate-fade-in-up">
+            <h1 className="text-7xl md:text-9xl font-black tracking-tighter text-white mb-2 drop-shadow-2xl">
+              ZORODOOR
+            </h1>
+            <p className="text-sm md:text-lg font-medium text-white/90 tracking-[0.5em] uppercase mb-12">
+              Brutal Elegance
+            </p>
           </div>
 
-          <h1 className="text-6xl md:text-8xl lg:text-9xl font-black text-[#2C2420] tracking-tighter leading-[0.85] text-balance drop-shadow-sm">
-            EXPRESS<br />
-            <span className="relative inline-block text-transparent bg-clip-text bg-gradient-to-r from-[#2C2420] via-[#8B7355] to-[#2C2420] bg-300% animate-gradient pb-2">
-              YOURSELF
-            </span>
-          </h1>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 w-full max-w-2xl mx-auto animate-fade-in-up delay-200">
+            <Link
+              href="/mens"
+              className="group relative h-16 bg-white text-black flex items-center justify-center hover:bg-zinc-200 transition-colors duration-300"
+            >
+              <span className="font-bold text-lg tracking-widest uppercase flex items-center gap-3">
+                Shop Men <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
+              </span>
+            </Link>
 
-          <p className="text-lg md:text-xl text-[#6B5E52] max-w-xl mx-auto font-medium leading-relaxed">
-            Unapologetically bold. High-end anime aesthetics for the concrete jungle.
+            <Link
+              href="/madamji"
+              className="group relative h-16 bg-transparent border border-white text-white flex items-center justify-center hover:bg-white hover:text-black transition-all duration-300 backdrop-blur-sm"
+            >
+              <span className="font-bold text-lg tracking-widest uppercase flex items-center gap-3">
+                Shop Madamji <Sparkles size={18} className="group-hover:rotate-12 transition-transform" />
+              </span>
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* 2. CATEGORY PREVIEW - Minimalist Grid */}
+      <section className="py-24 px-6 max-w-[1440px] mx-auto">
+        <div className="flex flex-col md:flex-row justify-between items-end mb-16 border-b border-zinc-200 dark:border-zinc-800 pb-8">
+          <div>
+            <span className="text-xs font-bold tracking-[0.2em] text-zinc-500 uppercase mb-2 block">Collections</span>
+            <h2 className="text-4xl md:text-5xl font-bold text-black dark:text-white tracking-tight">
+              LATEST DROPS
+            </h2>
+          </div>
+          <Link href="/shop" className="hidden md:flex items-center gap-2 text-black dark:text-white font-medium hover:text-zinc-500 dark:hover:text-zinc-400 transition-colors mt-4 md:mt-0">
+            VIEW ALL <ArrowRight size={18} />
+          </Link>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-1">
+          {categories.map((category, index) => (
+            <Link
+              key={category.id}
+              href={category.link}
+              className="group relative aspect-[3/4] overflow-hidden bg-zinc-100 dark:bg-zinc-900"
+            >
+              <Image
+                src={category.image}
+                alt={category.name}
+                fill
+                className="object-cover object-center transition-transform duration-700 ease-out group-hover:scale-105 opacity-90 group-hover:opacity-100"
+              />
+
+              <div className="absolute bottom-0 left-0 w-full p-8 bg-gradient-to-t from-black/50 to-transparent">
+                <h3 className="text-2xl font-bold text-white mb-2">{category.name}</h3>
+                <span className="text-white/80 text-xs font-bold tracking-widest uppercase inline-block border-b border-transparent group-hover:border-white transition-all">
+                  View Collection
+                </span>
+              </div>
+            </Link>
+          ))}
+        </div>
+
+        <div className="mt-12 flex justify-center md:hidden">
+          <Link href="/shop" className="flex items-center gap-2 text-black dark:text-white font-bold hover:underline underline-offset-4">
+            VIEW ALL <ArrowRight size={18} />
+          </Link>
+        </div>
+      </section>
+
+      {/* 3. BRAND STATEMENT - Clean Typography */}
+      <section className="py-32 bg-[#F5F2ED] dark:bg-black text-black dark:text-white relative overflow-hidden">
+        <div className="max-w-5xl mx-auto text-center px-6 relative z-10">
+          <Crown size={32} className="mx-auto mb-8 text-black/20 dark:text-white/20" />
+          <h2 className="text-3xl md:text-5xl font-bold mb-8 leading-tight tracking-tight">
+            "We don't just sell clothes.<br />We armor your ambition."
+          </h2>
+          <p className="text-lg text-zinc-500 dark:text-zinc-400 mb-12 max-w-2xl mx-auto font-light leading-relaxed">
+            Quality that commands respect. Designs that demand attention.
+            Welcome to the new standard of Indian streetwear.
           </p>
 
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-6 pt-6 w-full">
-            <Link href="/shop" className="w-full sm:w-auto">
-              <Button size="xl" variant="primary" className="w-full shadow-2xl shadow-[#8B7355]/20 hover:shadow-[#8B7355]/30 hover:-translate-y-1 transition-all duration-300">
-                Shop Collection <ArrowRight className="ml-2 w-5 h-5" />
-              </Button>
-            </Link>
-            <Link href="/shop?category=hoodies" className="w-full sm:w-auto">
-              <Button size="xl" variant="outline" className="w-full bg-transparent border-[#2C2420]/20 hover:bg-[#2C2420] hover:text-[#F5F2ED] hover:border-transparent transition-all duration-300">
-                Explore Hoodies
-              </Button>
-            </Link>
-          </div>
-        </div>
-      </section>
-
-      {/* Featured Products Grid */}
-      <section className="py-24 w-full bg-[#F5F2ED]">
-        <div className="mx-auto max-w-[1440px] px-6 lg:px-12">
-          <div className="flex items-end justify-between mb-12">
-            <div>
-              <h2 className="text-3xl md:text-4xl font-black text-[#2C2420] tracking-tight mb-2">NEW DROP</h2>
-              <p className="text-[#6B5E52]">Fresh heavyweights just landed.</p>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-12 text-center max-w-3xl mx-auto border-t border-black/10 dark:border-white/10 pt-12">
+            <div className="flex flex-col items-center gap-3">
+              <Zap size={24} className="text-black/40 dark:text-white/40" />
+              <span className="text-sm font-bold tracking-widest uppercase text-black dark:text-white">Fast Shipping</span>
             </div>
-            <Link href="/shop">
-              <Button variant="link" className="hidden sm:flex group">
-                View All Products <ArrowRight size={16} className="ml-1 group-hover:translate-x-1 transition-transform" />
-              </Button>
-            </Link>
-          </div>
-
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-y-12 gap-x-8">
-            {featuredProducts.map((product) => (
-              <ProductCard key={product.id} {...product} />
-            ))}
-          </div>
-
-          <div className="mt-12 text-center sm:hidden">
-            <Link href="/shop">
-              <Button variant="outline" size="lg" className="w-full">
-                View All Products
-              </Button>
-            </Link>
+            <div className="flex flex-col items-center gap-3">
+              <Star size={24} className="text-black/40 dark:text-white/40" />
+              <span className="text-sm font-bold tracking-widest uppercase text-black dark:text-white">Premium Cotton</span>
+            </div>
+            <div className="flex flex-col items-center gap-3">
+              <Crown size={24} className="text-black/40 dark:text-white/40" />
+              <span className="text-sm font-bold tracking-widest uppercase text-black dark:text-white">Limited Edition</span>
+            </div>
           </div>
         </div>
       </section>
 
-      {/* Categories / curated */}
-      <section className="py-24 bg-[#EBE7E0]">
-        <div className="mx-auto max-w-[1440px] px-6 lg:px-12">
-          <h2 className="text-3xl md:text-4xl font-black text-[#2C2420] tracking-tight mb-12 text-center">CURATED COLLECTIONS</h2>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {categories.map((cat) => (
-              <Link key={cat.name} href={cat.href} className="group relative h-[500px] overflow-hidden rounded-2xl">
-                <div className="absolute inset-0 bg-[#2C2420] transition-colors" />
-                <Image
-                  src={cat.image}
-                  alt={cat.name}
-                  fill
-                  className="object-cover opacity-80 group-hover:opacity-60 transition-opacity duration-300"
-                />
-
-                <div className="absolute inset-0 flex items-center justify-center bg-black/10 group-hover:bg-black/30 transition-colors duration-300">
-                  <div className="bg-white/95 backdrop-blur-md px-8 py-4 rounded-xl transform transition-transform duration-300 group-hover:scale-110">
-                    <span className="text-xl font-bold text-[#2C2420] uppercase tracking-widest">{cat.name}</span>
-                  </div>
-                </div>
-              </Link>
-            ))}
-          </div>
-        </div>
-      </section>
-    </div>
+    </main>
   );
 }

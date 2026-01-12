@@ -1,7 +1,6 @@
 import NextAuth from "next-auth"
 import { PrismaAdapter } from "@auth/prisma-adapter"
 import Credentials from "next-auth/providers/credentials"
-import Google from "next-auth/providers/google"
 import bcrypt from "bcryptjs"
 import { prisma } from "@/lib/prisma"
 import { z } from "zod"
@@ -26,7 +25,6 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
         signIn: "/login",
     },
     providers: [
-        Google,
         Credentials({
             async authorize(credentials) {
                 const parsedCredentials = z

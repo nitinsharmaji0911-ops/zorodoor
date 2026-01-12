@@ -1,33 +1,18 @@
 import { NextResponse } from 'next/server';
-import fs from 'fs';
-import path from 'path';
+import { prisma } from '@/lib/prisma';
 
-const dataFilePath = path.join(process.cwd(), 'data', 'products.json');
-
-interface Product {
-    id: string;
-    [key: string]: any;
-}
-
-interface ProductData {
-    products: Product[];
-}
-
-function getProducts(): ProductData {
-    const jsonData = fs.readFileSync(dataFilePath, 'utf8');
-    return JSON.parse(jsonData);
-}
-
+// GET /api/products/[id] - Fetch a single product by ID
 export async function GET(
     request: Request,
     { params }: { params: Promise<{ id: string }> }
 ) {
     try {
         const { id } = await params;
-        const data = getProducts();
 
-        // Find product by exact ID match
-        const product = data.products.find((p) => p.id === id);
+        // Find product by ID
+        const product = await prisma.product.findUnique({
+            where: { id },
+        });
 
         if (!product) {
             return NextResponse.json(
@@ -37,7 +22,7 @@ export async function GET(
         }
 
         return NextResponse.json(product);
-    } catch (error) {
+    } catch (error: any) {
         console.error('Error fetching product:', error);
         return NextResponse.json(
             { error: 'Internal Server Error' },

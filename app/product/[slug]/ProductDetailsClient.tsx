@@ -196,7 +196,7 @@ export default function ProductDetailsClient({ product, relatedProducts }: Produ
                 <div className="space-y-3 bg-[--color-primary-bg-secondary] border border-[--color-border] rounded-lg p-4">
                     <div className="flex items-center gap-3 text-[--color-text-secondary]">
                         <Truck size={20} className="text-[--color-accent-cyan]" />
-                        <span className="text-sm">Free shipping on orders over $100</span>
+                        <span className="text-sm">Free shipping on orders over ₹5000</span>
                     </div>
                     <div className="flex items-center gap-3 text-[--color-text-secondary]">
                         <Shield size={20} className="text-[--color-accent-cyan]" />

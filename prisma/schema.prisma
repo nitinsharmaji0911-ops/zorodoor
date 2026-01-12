@@ -32,6 +32,8 @@ model Product {
   price       Float
   images      String[]
   category    String
+  gender      String   @default("Unisex") // "Men", "Women", "Unisex"
+  collections String[] // e.g., ["His Hoodie", "New Drop"]
   sizes       String[]
   features    String[]
   rating      Float    @default(0)

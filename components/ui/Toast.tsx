@@ -41,10 +41,10 @@ export function ToastProvider({ children }: { children: React.ReactNode }) {
                     <div
                         key={toast.id}
                         className={`flex items-start gap-3 px-4 py-3 rounded-lg shadow-lg border animate-in slide-in-from-right duration-200 ${toast.type === "success"
-                            ? "bg-[--color-success]/10 border-[--color-success] text-[--color-success]"
+                            ? "bg-[#F0FDF4] dark:bg-green-950 border-green-500 text-green-800 dark:text-green-100"
                             : toast.type === "error"
-                                ? "bg-[--color-error]/10 border-[--color-error] text-[--color-error]"
-                                : "bg-[--color-accent-cyan]/10 border-[--color-accent-cyan] text-[--color-accent-cyan]"
+                                ? "bg-[#FEF2F2] dark:bg-red-950 border-red-500 text-red-800 dark:text-red-100"
+                                : "bg-white dark:bg-zinc-800 border-zinc-200 dark:border-zinc-700 text-zinc-800 dark:text-zinc-100"
                             }`}
                     >
                         {toast.type === "success" && <CheckCircle size={20} />}

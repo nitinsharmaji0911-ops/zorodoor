@@ -60,7 +60,7 @@ export default function Modal({
             {/* Modal */}
             <div
                 className={cn(
-                    "relative w-full bg-[--color-primary-bg-secondary] border border-[--color-border] rounded-xl shadow-2xl overflow-hidden animate-in fade-in zoom-in duration-200",
+                    "relative w-full bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-xl shadow-2xl overflow-hidden animate-in fade-in zoom-in duration-200",
                     sizes[size]
                 )}
                 onClick={(e) => e.stopPropagation()}

@@ -1,6 +1,7 @@
 "use client";
 
 import React, { createContext, useContext, useState, useEffect } from "react";
+import { useSession, signIn, signOut } from "next-auth/react";
 
 export interface User {
     id: string;
@@ -18,16 +19,16 @@ export interface User {
 export interface Order {
     id: string;
     date: string;
-    status: "processing" | "shipped" | "delivered" | "cancelled";
+    status: "PENDING" | "PAID" | "SHIPPED" | "DELIVERED" | "CANCELLED";
     total: number;
-    items: number;
+    items: any[];
 }
 
 interface UserContextType {
     user: User | null;
     isAuthenticated: boolean;
     orders: Order[];
-    login: (email: string, password: string) => boolean;
+    login: (email: string, password: string) => Promise<boolean>;
     logout: () => void;
     updateUser: (data: Partial<User>) => void;
     addOrder: (order: Order) => void;
@@ -35,81 +36,66 @@ interface UserContextType {
 
 const UserContext = createContext<UserContextType | undefined>(undefined);
 
-// Mock user for demo purposes
-const MOCK_USER: User = {
-    id: "user_001",
-    firstName: "John",
-    lastName: "Doe",
-    email: "john@example.com",
-    phone: "+1 234 567 8900",
-    address: "123 Streetwear Ave",
-    city: "New York",
-    state: "NY",
-    zipCode: "10001",
-    country: "USA",
-};
-
-const MOCK_ORDERS: Order[] = [
-    {
-        id: "ORD-001",
-        date: "2026-01-01",
-        status: "delivered",
-        total: 299.97,
-        items: 3,
-    },
-    {
-        id: "ORD-002",
-        date: "2026-01-03",
-        status: "shipped",
-        total: 149.99,
-        items: 1,
-    },
-];
-
 export function UserProvider({ children }: { children: React.ReactNode }) {
-    const [user, setUser] = useState<User | null>(null);
+    const { data: session, status } = useSession();
     const [orders, setOrders] = useState<Order[]>([]);
-    const [isAuthenticated, setIsAuthenticated] = useState(false);
 
-    // Load user from localStorage on mount
+    // Map session user to our User interface
+    const user: User | null = session?.user ? {
+        id: session.user.id || "",
+        firstName: session.user.name?.split(" ")[0] || "",
+        lastName: session.user.name?.split(" ").slice(1).join(" ") || "",
+        email: session.user.email || "",
+        // Other fields would need to be fetched from a profile API if stored in DB but not in session
+    } : null;
+
+    const isAuthenticated = status === "authenticated";
+
+    // Fetch orders when authenticated
     useEffect(() => {
-        const savedUser = localStorage.getItem("zorodoor-user");
-        if (savedUser) {
-            setUser(JSON.parse(savedUser));
-            setIsAuthenticated(true);
-            setOrders(MOCK_ORDERS);
+        if (isAuthenticated) {
+            fetchOrders();
+        } else {
+            setOrders([]);
         }
-    }, []);
+    }, [isAuthenticated]);
 
-    const login = (email: string, password: string): boolean => {
-        // Mock authentication - in production, this would call an API
-        if (email && password) {
-            setUser(MOCK_USER);
-            setIsAuthenticated(true);
-            setOrders(MOCK_ORDERS);
-            localStorage.setItem("zorodoor-user", JSON.stringify(MOCK_USER));
-            return true;
+    const fetchOrders = async () => {
+        try {
+            const res = await fetch("/api/orders");
+            if (res.ok) {
+                const data = await res.json();
+                setOrders(data);
+            }
+        } catch (error) {
+            console.error("Failed to fetch orders", error);
         }
-        return false;
+    };
+
+    const login = async (email: string, password: string): Promise<boolean> => {
+        const result = await signIn("credentials", {
+            redirect: false,
+            email,
+            password,
+        });
+        return !result?.error;
     };
 
     const logout = () => {
-        setUser(null);
-        setIsAuthenticated(false);
-        setOrders([]);
-        localStorage.removeItem("zorodoor-user");
+        signOut({ callbackUrl: "/" });
     };
 
     const updateUser = (data: Partial<User>) => {
-        if (user) {
-            const updatedUser = { ...user, ...data };
-            setUser(updatedUser);
-            localStorage.setItem("zorodoor-user", JSON.stringify(updatedUser));
-        }
+        // In a real app, this would make a PATCH request to /api/user/profile
+        // For now, next-auth session update is complex, so we'll just log it
+        console.log("Update user not fully implemented yet", data);
     };
 
     const addOrder = (order: Order) => {
+        // Optimistic update
         setOrders(prev => [order, ...prev]);
+        // Ideally reload from server
+        fetchOrders();
     };
 
     return (

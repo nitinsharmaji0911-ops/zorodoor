@@ -9,8 +9,15 @@ import { z } from 'zod'
 export async function authenticate(prevState: string | undefined, formData: FormData) {
     try {
         await signIn('credentials', formData)
-    } catch (error) {
+    } catch (error: any) {
+        // NEXT_REDIRECT is actually a success signal in Server Actions
+        if (error.message === "NEXT_REDIRECT" || (error.digest && error.digest.startsWith("NEXT_REDIRECT"))) {
+            throw error;
+        }
+
+        console.error("LOGIN ERROR:", error);
         if (error instanceof AuthError) {
+            console.error("AuthError Type:", error.type);
             switch (error.type) {
                 case 'CredentialsSignin':
                     return 'Invalid credentials.'

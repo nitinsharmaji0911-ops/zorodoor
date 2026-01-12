@@ -68,9 +68,9 @@ export default function ProductCard({
 
     return (
         <div className="group relative flex flex-col w-full">
-            <Link href={`/product/${slug}`} className="block relative w-full rounded-2xl bg-[#EBE7E0] overflow-hidden group-hover:shadow-lg transition-all duration-300">
+            <Link href={`/product/${slug}`} className="block relative w-full rounded-2xl bg-[#EBE7E0] dark:bg-zinc-900 overflow-hidden group-hover:shadow-lg transition-all duration-300">
                 {/* Image Layer - Fixed Aspect Ratio */}
-                <div className="relative aspect-[4/5] w-full bg-[#EBE7E0]">
+                <div className="relative aspect-[4/5] w-full bg-[#EBE7E0] dark:bg-zinc-900">
                     <Image
                         src={images[0]}
                         alt={name}
@@ -105,7 +105,7 @@ export default function ProductCard({
                     <button
                         onClick={handleAddToCart}
                         disabled={!inStock}
-                        className="w-full bg-white/95 backdrop-blur-sm text-[#2C2420] font-bold py-3.5 rounded-xl hover:bg-[#2C2420] hover:text-white transition-colors flex items-center justify-center gap-2 shadow-lg"
+                        className="w-full bg-white/95 dark:bg-black/95 backdrop-blur-sm text-[#2C2420] dark:text-white font-bold py-3.5 rounded-xl hover:bg-[#2C2420] dark:hover:bg-white hover:text-white dark:hover:text-black transition-colors flex items-center justify-center gap-2 shadow-lg"
                     >
                         <Plus size={18} />
                         {inStock ? "Add to Cart" : "Out of Stock"}
@@ -129,15 +129,15 @@ export default function ProductCard({
             {/* Product Details - Minimal & Clean */}
             <div className="mt-4 flex flex-col gap-1">
                 <div className="flex justify-between items-start">
-                    <Link href={`/product/${slug}`} className="group-hover:text-[#8B7355] transition-colors duration-200">
-                        <h3 className="text-base font-bold text-[#2C2420] leading-tight line-clamp-1">{name}</h3>
+                    <Link href={`/product/${slug}`} className="group-hover:text-[#8B7355] dark:group-hover:text-cyan-400 transition-colors duration-200">
+                        <h3 className="text-base font-bold text-[#2C2420] dark:text-white leading-tight line-clamp-1">{name}</h3>
                     </Link>
-                    <span className="text-sm font-bold text-[#2C2420]">{formatPrice(price)}</span>
+                    <span className="text-sm font-bold text-[#2C2420] dark:text-white">{formatPrice(price)}</span>
                 </div>
 
                 <div className="flex items-center gap-2">
-                    <span className="text-xs text-[#6B5E52] capitalize">{sizes[0]} - {sizes[sizes.length - 1]}</span>
-                    <span className="w-1 h-1 rounded-full bg-[#E8E2D8]"></span>
+                    <span className="text-xs text-[#6B5E52] dark:text-gray-400 capitalize">{sizes[0]} - {sizes[sizes.length - 1]}</span>
+                    <span className="w-1 h-1 rounded-full bg-[#E8E2D8] dark:bg-gray-700"></span>
                     <RatingStars rating={rating} reviewCount={reviewCount} size={12} showCount={false} />
                 </div>
 
@@ -145,7 +145,7 @@ export default function ProductCard({
                 <button
                     onClick={handleAddToCart}
                     disabled={!inStock}
-                    className="lg:hidden mt-2 w-full py-2.5 bg-[#2C2420] text-white text-sm font-bold rounded-lg"
+                    className="lg:hidden mt-2 w-full py-2.5 bg-[#2C2420] dark:bg-white text-white dark:text-black text-sm font-bold rounded-lg"
                 >
                     Add to Cart
                 </button>

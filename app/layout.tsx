@@ -4,6 +4,8 @@ import { CartProvider } from "@/lib/contexts/CartContext";
 import { WishlistProvider } from "@/lib/contexts/WishlistContext";
 import { UserProvider } from "@/lib/contexts/UserContext";
 import { ToastProvider } from "@/components/ui/Toast";
+import { ThemeProvider } from "@/components/theme-provider";
+import SessionProvider from "@/components/SessionProvider";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 
@@ -65,19 +67,28 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <body className="antialiased">
-        <UserProvider>
-          <CartProvider>
-            <WishlistProvider>
-              <ToastProvider>
-                <Navbar />
-                <main className="min-h-screen">{children}</main>
-                <Footer />
-              </ToastProvider>
-            </WishlistProvider>
-          </CartProvider>
-        </UserProvider>
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="dark"
+          enableSystem
+          disableTransitionOnChange
+        >
+          <SessionProvider>
+            <UserProvider>
+              <CartProvider>
+                <WishlistProvider>
+                  <ToastProvider>
+                    <Navbar />
+                    <main className="min-h-screen">{children}</main>
+                    <Footer />
+                  </ToastProvider>
+                </WishlistProvider>
+              </CartProvider>
+            </UserProvider>
+          </SessionProvider>
+        </ThemeProvider>
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{

@@ -7,7 +7,7 @@ export default async function AdminDashboard() {
 
     // Basic stats
     const stats = [
-        { label: "Total Revenue", value: "$0.00", change: "0%" }, // Mock for now
+        { label: "Total Revenue", value: "₹0.00", change: "0%" }, // Mock for now
         { label: "Total Orders", value: orderCount.toString(), change: "0%" },
         { label: "Products", value: productCount.toString(), change: "0%" },
         { label: "Customers", value: userCount.toString(), change: "0%" },

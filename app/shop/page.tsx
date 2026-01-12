@@ -1,18 +1,44 @@
 "use client";
 
-import React, { useState, useMemo, Suspense } from "react";
+import React, { useState, useMemo, Suspense, useEffect } from "react";
 import { useSearchParams } from "next/navigation";
 import ProductCard from "@/components/products/ProductCard";
 import Breadcrumbs from "@/components/ui/Breadcrumbs";
-import productsData from "@/data/products.json";
 import { ChevronDown } from "lucide-react";
+
+interface Product {
+    id: string;
+    name: string;
+    slug: string;
+    category: string;
+    price: number;
+    images: string[];
+    sizes: string[];
+    rating: number;
+    reviewCount: number;
+    description: string;
+    features: string[];
+    inStock: boolean;
+    featured: boolean;
+    newArrival: boolean;
+    gender: string;
+    collections: string[];
+}
 
 function ShopContent() {
     const searchParams = useSearchParams();
+    const [products, setProducts] = useState<Product[]>([]);
+    const [loading, setLoading] = useState(true);
     const [selectedCategory, setSelectedCategory] = useState(
         searchParams.get("category") || "all"
     );
-    const [priceRange, setPriceRange] = useState([0, 200]);
+    const [selectedCollection, setSelectedCollection] = useState(
+        searchParams.get("collection") || ""
+    );
+    const [selectedGender, setSelectedGender] = useState(
+        searchParams.get("gender") || "all"
+    );
+    const [priceRange, setPriceRange] = useState([0, 5000]); // Increased range for INR
     const [selectedSizes, setSelectedSizes] = useState<string[]>([]);
     const [sortBy, setSortBy] = useState(searchParams.get("sort") || "featured");
 
@@ -26,19 +52,41 @@ function ShopContent() {
 
     const [searchQuery, setSearchQuery] = useState(searchParams.get("search") || "");
 
+    // Fetch products from API
+    useEffect(() => {
+        async function fetchProducts() {
+            try {
+                setLoading(true);
+                // Fetch all products and filter client-side for now to maintain existing behavior
+                const response = await fetch('/api/products');
+                if (!response.ok) throw new Error('Failed to fetch products');
+                const data = await response.json();
+                setProducts(data);
+            } catch (error) {
+                console.error('Error fetching products:', error);
+                setProducts([]);
+            } finally {
+                setLoading(false);
+            }
+        }
+        fetchProducts();
+    }, []);
+
     // Update local state when URL params change
     React.useEffect(() => {
         setSearchQuery(searchParams.get("search") || "");
         setSelectedCategory(searchParams.get("category") || "all");
+        setSelectedCollection(searchParams.get("collection") || "");
+        setSelectedGender(searchParams.get("gender") || "all");
     }, [searchParams]);
 
     const filteredAndSortedProducts = useMemo(() => {
-        let filtered = productsData.products.filter((product) => {
+        let filtered = products.filter((product) => {
             // Search Filter
             if (searchQuery) {
                 const query = searchQuery.toLowerCase();
                 const matchName = product.name.toLowerCase().includes(query);
-                const matchDesc = product.description.toLowerCase().includes(query);
+                const matchDesc = product.description?.toLowerCase().includes(query);
                 const matchCat = product.category.toLowerCase().includes(query);
 
                 if (!matchName && !matchDesc && !matchCat) return false;
@@ -48,10 +96,25 @@ function ShopContent() {
             if (
                 selectedCategory !== "all" &&
                 product.category.toLowerCase() !== selectedCategory.toLowerCase() &&
-                // Handle case where category might be singular/plural mismatch
                 !selectedCategory.toLowerCase().includes(product.category.toLowerCase())
             ) {
                 return false;
+            }
+
+            // Collection filter
+            if (
+                selectedCollection &&
+                (!product.collections || !product.collections.includes(selectedCollection))
+            ) {
+                return false;
+            }
+
+            // Gender filter
+            if (selectedGender !== "all") {
+                if (product.gender === "Unisex") return true; // Unisex shows for everyone
+                if (product.gender.toLowerCase() !== selectedGender.toLowerCase()) {
+                    return false;
+                }
             }
 
             // Price filter
@@ -91,7 +154,7 @@ function ShopContent() {
         }
 
         return filtered;
-    }, [selectedCategory, priceRange, selectedSizes, sortBy, searchQuery]);
+    }, [products, selectedCategory, priceRange, selectedSizes, sortBy, searchQuery]);
 
     const toggleSize = (size: string) => {
         setSelectedSizes((prev) =>
@@ -101,10 +164,20 @@ function ShopContent() {
 
     const clearFilters = () => {
         setSelectedCategory("all");
-        setPriceRange([0, 200]);
+        setSelectedCollection("");
+        setSelectedGender("all");
+        setPriceRange([0, 5000]);
         setSelectedSizes([]);
         setSortBy("featured");
     };
+
+    if (loading) {
+        return (
+            <div className="bg-[--color-primary-bg] min-h-screen py-8 flex items-center justify-center">
+                <div className="text-[--color-text-primary] text-xl">Loading products...</div>
+            </div>
+        );
+    }
 
     return (
         <div className="bg-[--color-primary-bg] min-h-screen py-8">
