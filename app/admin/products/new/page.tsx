@@ -48,52 +48,50 @@ export default function AddProductPage() {
                 Back to Products
             </Link>
 
-            <div className="bg-white rounded-xl shadow-sm border border-[#EBE7E0] p-8">
-                <h2 className="text-2xl font-bold text-[#2C2420] mb-6">Add New Product</h2>
+            <div className="bg-white dark:bg-zinc-900 rounded-xl shadow-sm border border-[#EBE7E0] dark:border-zinc-800 p-8">
+                <h2 className="text-2xl font-bold text-[#2C2420] dark:text-white mb-6">Add New Product</h2>
 
                 <form action={createProduct} className="space-y-6">
                     <div>
-                        <label className="block text-sm font-medium text-[#6B5E52] mb-1">Product Name</label>
-                        <div className="text-black">
-                            <input
-                                name="name"
-                                type="text"
-                                required
-                                placeholder="e.g. Graphic Hoodie"
-                                className="w-full px-4 py-3 bg-white border border-[#EBE7E0] rounded-lg focus:outline-none focus:border-[#8B7355] transition-colors"
-                            />
-                        </div>
+                        <label className="block text-sm font-medium text-[#6B5E52] dark:text-gray-300 mb-1">Product Name</label>
+                        <input
+                            name="name"
+                            type="text"
+                            required
+                            placeholder="e.g. Graphic Hoodie"
+                            className="w-full px-4 py-3 bg-white dark:bg-zinc-800 text-black dark:text-white border border-[#EBE7E0] dark:border-zinc-700 rounded-lg focus:outline-none focus:border-[#8B7355] dark:focus:border-cyan-400 transition-colors placeholder:text-gray-400 dark:placeholder:text-gray-500"
+                        />
                     </div>
 
                     <div className="grid grid-cols-2 gap-6">
                         <div>
-                            <label className="block text-sm font-medium text-[#6B5E52] mb-1">Price ($)</label>
+                            <label className="block text-sm font-medium text-[#6B5E52] dark:text-gray-300 mb-1">Price (₹)</label>
                             <input
                                 name="price"
                                 type="number"
                                 step="0.01"
                                 required
-                                placeholder="0.00"
-                                className="w-full px-4 py-3 bg-white border border-[#EBE7E0] rounded-lg focus:outline-none focus:border-[#8B7355] transition-colors"
+                                placeholder="2999.00"
+                                className="w-full px-4 py-3 bg-white dark:bg-zinc-800 text-black dark:text-white border border-[#EBE7E0] dark:border-zinc-700 rounded-lg focus:outline-none focus:border-[#8B7355] dark:focus:border-cyan-400 transition-colors placeholder:text-gray-400 dark:placeholder:text-gray-500"
                             />
                         </div>
                         <div>
-                            <label className="block text-sm font-medium text-[#6B5E52] mb-1">Stock Quantity</label>
+                            <label className="block text-sm font-medium text-[#6B5E52] dark:text-gray-300 mb-1">Stock Quantity</label>
                             <input
                                 name="stock"
                                 type="number"
                                 required
                                 placeholder="100"
-                                className="w-full px-4 py-3 bg-white border border-[#EBE7E0] rounded-lg focus:outline-none focus:border-[#8B7355] transition-colors"
+                                className="w-full px-4 py-3 bg-white dark:bg-zinc-800 text-black dark:text-white border border-[#EBE7E0] dark:border-zinc-700 rounded-lg focus:outline-none focus:border-[#8B7355] dark:focus:border-cyan-400 transition-colors placeholder:text-gray-400 dark:placeholder:text-gray-500"
                             />
                         </div>
                     </div>
 
                     <div>
-                        <label className="block text-sm font-medium text-[#6B5E52] mb-1">Category</label>
+                        <label className="block text-sm font-medium text-[#6B5E52] dark:text-gray-300 mb-1">Category</label>
                         <select
                             name="category"
-                            className="w-full px-4 py-3 bg-white border border-[#EBE7E0] rounded-lg focus:outline-none focus:border-[#8B7355] transition-colors"
+                            className="w-full px-4 py-3 bg-white dark:bg-zinc-800 text-black dark:text-white border border-[#EBE7E0] dark:border-zinc-700 rounded-lg focus:outline-none focus:border-[#8B7355] dark:focus:border-cyan-400 transition-colors"
                         >
                             <option value="Hoodies">Hoodies</option>
                             <option value="T-Shirts">T-Shirts</option>
@@ -103,13 +101,13 @@ export default function AddProductPage() {
                     </div>
 
                     <div>
-                        <label className="block text-sm font-medium text-[#6B5E52] mb-1">Description</label>
+                        <label className="block text-sm font-medium text-[#6B5E52] dark:text-gray-300 mb-1">Description</label>
                         <textarea
                             name="description"
                             required
                             rows={4}
                             placeholder="Product description..."
-                            className="w-full px-4 py-3 bg-white border border-[#EBE7E0] rounded-lg focus:outline-none focus:border-[#8B7355] transition-colors"
+                            className="w-full px-4 py-3 bg-white dark:bg-zinc-800 text-black dark:text-white border border-[#EBE7E0] dark:border-zinc-700 rounded-lg focus:outline-none focus:border-[#8B7355] dark:focus:border-cyan-400 transition-colors placeholder:text-gray-400 dark:placeholder:text-gray-500"
                         />
                     </div>
 
@@ -151,13 +149,13 @@ export default function AddProductPage() {
                     </div>
 
                     <div>
-                        <label className="block text-sm font-medium text-[#6B5E52] mb-1">Sizes (Comma separated)</label>
+                        <label className="block text-sm font-medium text-[#6B5E52] dark:text-gray-300 mb-1">Sizes (Comma separated)</label>
                         <input
                             name="sizes"
                             type="text"
                             defaultValue="S, M, L, XL"
                             placeholder="S, M, L, XL"
-                            className="w-full px-4 py-3 bg-white border border-[#EBE7E0] rounded-lg focus:outline-none focus:border-[#8B7355] transition-colors"
+                            className="w-full px-4 py-3 bg-white dark:bg-zinc-800 text-black dark:text-white border border-[#EBE7E0] dark:border-zinc-700 rounded-lg focus:outline-none focus:border-[#8B7355] dark:focus:border-cyan-400 transition-colors placeholder:text-gray-400 dark:placeholder:text-gray-500"
                         />
                     </div>
 

@@ -10,19 +10,14 @@ export default async function AdminLayout({
 }) {
     const session = await auth();
 
-    if (!session || session.user.role !== "ADMIN") {
-        // redirect("/"); // Uncomment in production to secure
-        // For verification, checking role. If mocking, we might not have role set.
-        // If you haven't manually set role='ADMIN' in DB, this will block you.
-        // For now, I will allow access if logged in, or check console. 
-        // Ideally: redirect("/");
-
-        // STRICT CHECK:
-        // return <div className="p-10">Access Denied. You are not an admin. Role: {session?.user?.role}</div>
+    // Strict admin-only access
+    if (!session) {
+        redirect("/login");
     }
 
-    // NOTE: For now, bypassing strict check to allow viewing the UI if role setup is tricky without DB access tool.
-    // In production, uncomment the redirect.
+    if (session.user.role !== "ADMIN") {
+        redirect("/");
+    }
 
     return (
         <div className="flex h-screen bg-[#F5F2ED]">
