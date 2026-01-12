@@ -244,7 +244,7 @@ function ShopContent() {
                                 <input
                                     type="range"
                                     min="0"
-                                    max="200"
+                                    max="5000"
                                     value={priceRange[1]}
                                     onChange={(e) =>
                                         setPriceRange([0, parseInt(e.target.value)])
@@ -252,8 +252,8 @@ function ShopContent() {
                                     className="w-full"
                                 />
                                 <div className="flex justify-between text-sm text-[--color-text-secondary]">
-                                    <span>${priceRange[0]}</span>
-                                    <span>${priceRange[1]}</span>
+                                    <span>₹{priceRange[0]}</span>
+                                    <span>₹{priceRange[1]}</span>
                                 </div>
                             </div>
                         </div>
