@@ -21,13 +21,8 @@ export default function AdminDashboard() {
     const [isLoading, setIsLoading] = useState(true);
 
     useEffect(() => {
-        const token = localStorage.getItem("admin_token");
-        if (!token) {
-            router.push("/admin");
-            return;
-        }
         fetchProducts();
-    }, [router]);
+    }, []);
 
     const fetchProducts = async () => {
         try {
