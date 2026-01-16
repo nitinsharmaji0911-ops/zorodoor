@@ -1,5 +1,7 @@
 import { NextResponse } from 'next/server';
-import { prisma } from '@/lib/prisma';
+import { readFileSync } from 'fs';
+import { join } from 'path';
+// import { prisma } from '@/lib/prisma';
 
 // GET /api/products/[id] - Fetch a single product by ID
 export async function GET(
@@ -9,10 +11,13 @@ export async function GET(
     try {
         const { id } = await params;
 
+        // Read products from JSON file
+        const filePath = join(process.cwd(), 'data', 'products.json');
+        const fileContent = readFileSync(filePath, 'utf-8');
+        const data = JSON.parse(fileContent);
+        
         // Find product by ID
-        const product = await prisma.product.findUnique({
-            where: { id },
-        });
+        const product = data.products.find((p: any) => p.id === id);
 
         if (!product) {
             return NextResponse.json(

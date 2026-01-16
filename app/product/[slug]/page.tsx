@@ -3,13 +3,17 @@ import Link from "next/link";
 import { ArrowLeft } from "lucide-react";
 import Breadcrumbs from "@/components/ui/Breadcrumbs";
 import ProductDetailsClient from "./ProductDetailsClient";
-import { prisma } from "@/lib/prisma";
+import { readFileSync } from "fs";
+import { join } from "path";
+// import { prisma } from "@/lib/prisma";
 import { notFound } from "next/navigation";
 
 async function getProduct(slug: string) {
-    const product = await prisma.product.findUnique({
-        where: { slug },
-    });
+    const filePath = join(process.cwd(), 'data', 'products.json');
+    const fileContent = readFileSync(filePath, 'utf-8');
+    const data = JSON.parse(fileContent);
+    
+    const product = data.products.find((p: any) => p.slug === slug);
 
     if (!product) return null;
 
@@ -17,13 +21,13 @@ async function getProduct(slug: string) {
 }
 
 async function getRelatedProducts(category: string, currentProductId: string) {
-    const products = await prisma.product.findMany({
-        where: {
-            category,
-            id: { not: currentProductId }
-        },
-        take: 4
-    });
+    const filePath = join(process.cwd(), 'data', 'products.json');
+    const fileContent = readFileSync(filePath, 'utf-8');
+    const data = JSON.parse(fileContent);
+    
+    const products = data.products
+        .filter((p: any) => p.category === category && p.id !== currentProductId)
+        .slice(0, 4);
 
     return products;
 }
