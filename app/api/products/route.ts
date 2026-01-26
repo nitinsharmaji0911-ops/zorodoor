@@ -1,5 +1,7 @@
 import { NextResponse } from 'next/server';
-import { prisma } from '@/lib/prisma';
+import { readFileSync } from 'fs';
+import { join } from 'path';
+import { prisma } from '@/lib/prisma'; // Still needed for POST/DELETE admin operations
 import { auth } from '@/auth';
 
 // GET /api/products - Fetch all products with filtering
@@ -12,38 +14,37 @@ export async function GET(request: Request) {
         const featured = searchParams.get('featured');
         const newArrival = searchParams.get('newArrival');
 
-        const where: any = {};
+        // Read products from JSON file
+        const filePath = join(process.cwd(), 'data', 'products.json');
+        const fileContent = readFileSync(filePath, 'utf-8');
+        const data = JSON.parse(fileContent);
+        let products = data.products;
 
+        // Apply filters
         if (gender) {
-            where.gender = gender;
+            products = products.filter((p: any) => p.gender === gender);
         }
 
         if (collection) {
-            // Prisma doesn't support 'contains' for string arrays directly in all versions, 
-            // but 'has' works for scalar lists in Postgres
-            where.collections = {
-                has: collection
-            };
+            products = products.filter((p: any) => 
+                p.collections && p.collections.includes(collection)
+            );
         }
 
         if (category) {
-            where.category = category;
+            products = products.filter((p: any) => p.category === category);
         }
 
         if (featured) {
-            where.featured = featured === 'true';
+            const isFeatured = featured === 'true';
+            products = products.filter((p: any) => p.featured === isFeatured);
         }
 
         if (newArrival) {
-            where.newArrival = newArrival === 'true';
+            const isNewArrival = newArrival === 'true';
+            products = products.filter((p: any) => p.newArrival === isNewArrival);
         }
 
-        const products = await prisma.product.findMany({
-            where,
-            orderBy: {
-                createdAt: 'desc',
-            },
-        });
         return NextResponse.json(products);
     } catch (error: any) {
         console.error('Error fetching products:', error);
