@@ -27,7 +27,9 @@
       ],
       "inStock": true,
       "featured": true,
-      "newArrival": true
+      "newArrival": true,
+      "gender": "Unisex",
+      "collections": []
     },
     {
       "id": "2",
@@ -56,7 +58,9 @@
       ],
       "inStock": true,
       "featured": true,
-      "newArrival": true
+      "newArrival": true,
+      "gender": "Unisex",
+      "collections": []
     },
     {
       "id": "3",
@@ -84,7 +88,9 @@
       ],
       "inStock": true,
       "featured": true,
-      "newArrival": false
+      "newArrival": false,
+      "gender": "Unisex",
+      "collections": []
     },
     {
       "id": "4",
@@ -112,7 +118,9 @@
       ],
       "inStock": true,
       "featured": true,
-      "newArrival": true
+      "newArrival": true,
+      "gender": "Unisex",
+      "collections": []
     },
     {
       "id": "5",
@@ -143,7 +151,9 @@
       ],
       "inStock": true,
       "featured": true,
-      "newArrival": false
+      "newArrival": false,
+      "gender": "Unisex",
+      "collections": []
     },
     {
       "id": "6",
@@ -171,7 +181,9 @@
       ],
       "inStock": true,
       "featured": true,
-      "newArrival": false
+      "newArrival": false,
+      "gender": "Unisex",
+      "collections": []
     },
     {
       "id": "7",
@@ -199,7 +211,9 @@
       ],
       "inStock": false,
       "featured": false,
-      "newArrival": true
+      "newArrival": true,
+      "gender": "Unisex",
+      "collections": []
     },
     {
       "id": "8",
@@ -228,7 +242,9 @@
       ],
       "inStock": true,
       "featured": true,
-      "newArrival": false
+      "newArrival": false,
+      "gender": "Unisex",
+      "collections": []
     },
     {
       "id": "prod_007",
@@ -252,7 +268,9 @@
       ],
       "inStock": true,
       "featured": true,
-      "newArrival": true
+      "newArrival": true,
+      "gender": "Unisex",
+      "collections": []
     }
   ]
 }

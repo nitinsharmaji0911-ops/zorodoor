@@ -29,6 +29,8 @@ async function main() {
                     stock: 50, // Default stock for seeding
                     featured: product.featured,
                     newArrival: product.newArrival,
+                    gender: product.gender || 'Unisex',
+                    collections: product.collections || [],
                 },
                 create: {
                     name: product.name,
@@ -45,6 +47,8 @@ async function main() {
                     stock: 50, // Default stock for seeding
                     featured: product.featured,
                     newArrival: product.newArrival,
+                    gender: product.gender || 'Unisex',
+                    collections: product.collections || [],
                 },
             })
         }
