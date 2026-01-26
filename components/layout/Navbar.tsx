@@ -5,7 +5,6 @@ import Link from "next/link";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { Search, Heart, ShoppingCart, User, Menu, X } from "lucide-react";
-import { ThemeToggle } from "@/components/ThemeToggle";
 import { useCart } from "@/lib/contexts/CartContext";
 import { useWishlist } from "@/lib/contexts/WishlistContext";
 import { cn } from "@/lib/utils";
@@ -109,7 +108,6 @@ export default function Navbar() {
 
                             {/* Action Icons */}
                             <div className="flex items-center gap-5">
-                                <ThemeToggle />
                                 <Link href="/wishlist" className="relative group">
                                     <Heart size={22} className="text-[#2C2420] dark:text-white group-hover:text-[#8B7355] dark:group-hover:text-white/70 transition-colors" />
                                     {wishlist.length > 0 && (

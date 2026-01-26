@@ -25,12 +25,28 @@ export default function LoginPage() {
                 showToast("Invalid credentials", "error");
             } else {
                 showToast("Welcome back!", "success");
-                // Force refresh to update session state
-                window.location.href = "/account";
+
+                // Fetch session to check user role and redirect accordingly
+                const sessionResponse = await fetch('/api/auth/session');
+                const session = await sessionResponse.json();
+
+                if (session?.user?.role === 'ADMIN') {
+                    window.location.href = "/admin";
+                } else {
+                    window.location.href = "/account";
+                }
             }
         } catch (error: any) {
             if (error.message === "NEXT_REDIRECT" || (error.digest && error.digest.startsWith("NEXT_REDIRECT"))) {
-                window.location.href = "/account";
+                // On redirect, check session to determine destination
+                const sessionResponse = await fetch('/api/auth/session');
+                const session = await sessionResponse.json();
+
+                if (session?.user?.role === 'ADMIN') {
+                    window.location.href = "/admin";
+                } else {
+                    window.location.href = "/account";
+                }
                 return;
             }
             showToast("Something went wrong", "error");
