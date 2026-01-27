@@ -13,37 +13,36 @@ export async function GET(request: Request) {
         const category = searchParams.get('category');
         const featured = searchParams.get('featured');
         const newArrival = searchParams.get('newArrival');
+        const limit = searchParams.get('limit'); // Add limit support
 
-        // Read products from JSON file
-        const filePath = join(process.cwd(), 'data', 'products.json');
-        const fileContent = readFileSync(filePath, 'utf-8');
-        const data = JSON.parse(fileContent);
-        let products = data.products;
+        // Build where clause
+        const where: any = {};
 
-        // Apply filters
-        if (gender) {
-            products = products.filter((p: any) => p.gender === gender);
+        if (gender && gender !== 'all') {
+            where.gender = gender;
         }
 
         if (collection) {
-            products = products.filter((p: any) => 
-                p.collections && p.collections.includes(collection)
-            );
+            where.collections = { has: collection };
         }
 
-        if (category) {
-            products = products.filter((p: any) => p.category === category);
+        if (category && category !== 'all') {
+            where.category = category;
         }
 
         if (featured) {
-            const isFeatured = featured === 'true';
-            products = products.filter((p: any) => p.featured === isFeatured);
+            where.featured = featured === 'true';
         }
 
         if (newArrival) {
-            const isNewArrival = newArrival === 'true';
-            products = products.filter((p: any) => p.newArrival === isNewArrival);
+            where.newArrival = newArrival === 'true';
         }
+
+        const products = await prisma.product.findMany({
+            where,
+            orderBy: { createdAt: 'desc' },
+            take: limit ? parseInt(limit) : undefined
+        });
 
         return NextResponse.json(products);
     } catch (error: any) {
