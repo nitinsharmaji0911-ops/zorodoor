@@ -9,10 +9,17 @@ export async function GET(
     try {
         const { id } = await params;
 
-        // Find product by ID from Database
-        const product = await prisma.product.findUnique({
+        // Try to find product by ID first
+        let product = await prisma.product.findUnique({
             where: { id }
         });
+
+        // If not found by ID, try finding by slug
+        if (!product) {
+            product = await prisma.product.findUnique({
+                where: { slug: id } // We use 'id' param as potential slug
+            });
+        }
 
         if (!product) {
             return NextResponse.json(
