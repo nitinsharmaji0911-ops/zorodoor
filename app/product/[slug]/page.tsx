@@ -3,33 +3,39 @@ import Link from "next/link";
 import { ArrowLeft } from "lucide-react";
 import Breadcrumbs from "@/components/ui/Breadcrumbs";
 import ProductDetailsClient from "./ProductDetailsClient";
-import { readFileSync } from "fs";
-import { join } from "path";
-// import { prisma } from "@/lib/prisma";
+import { prisma } from "@/lib/prisma";
 import { notFound } from "next/navigation";
 
+// Force dynamic rendering since we're fetching from DB
+export const dynamic = 'force-dynamic';
+
 async function getProduct(slug: string) {
-    const filePath = join(process.cwd(), 'data', 'products.json');
-    const fileContent = readFileSync(filePath, 'utf-8');
-    const data = JSON.parse(fileContent);
-    
-    const product = data.products.find((p: any) => p.slug === slug);
-
-    if (!product) return null;
-
-    return product;
+    try {
+        const product = await prisma.product.findUnique({
+            where: { slug }
+        });
+        return product;
+    } catch (error) {
+        console.error("Error fetching product:", error);
+        return null;
+    }
 }
 
 async function getRelatedProducts(category: string, currentProductId: string) {
-    const filePath = join(process.cwd(), 'data', 'products.json');
-    const fileContent = readFileSync(filePath, 'utf-8');
-    const data = JSON.parse(fileContent);
-    
-    const products = data.products
-        .filter((p: any) => p.category === category && p.id !== currentProductId)
-        .slice(0, 4);
-
-    return products;
+    try {
+        const products = await prisma.product.findMany({
+            where: {
+                category: category,
+                id: { not: currentProductId }
+            },
+            take: 4,
+            orderBy: { createdAt: 'desc' }
+        });
+        return products;
+    } catch (error) {
+        console.error("Error fetching related products:", error);
+        return [];
+    }
 }
 
 export default async function ProductDetail({ params }: { params: Promise<{ slug: string }> }) {
