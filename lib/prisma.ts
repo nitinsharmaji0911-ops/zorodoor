@@ -12,27 +12,15 @@ const getConnectionString = () => {
     try {
         // FIX: Detect if we are trying to connect to Direct Host on Pooler Port (6543)
         if (urlStr.includes('db.ibnydzahapvnmbtgoxha.supabase.co:6543')) {
-            console.warn('⚠️ Detected broken connection string. Applying runtime fix (Host + User)...');
+            console.warn('⚠️ Detected broken connection string. Aggressively fixing for Supabase Pooler...');
 
-            // Replace Host
-            const fixedUrl = urlStr.replace(
-                'db.ibnydzahapvnmbtgoxha.supabase.co:6543',
-                'aws-1-ap-south-1.pooler.supabase.com:6543'
-            );
+            // We know the password is correct in the env var, but the rest is messed up.
+            // So we extract the password and construct the known-good URL.
+            const urlObj = new URL(urlStr.replace('db.ibnydzahapvnmbtgoxha.supabase.co:6543', 'example.com')); // Dummy host to parse
+            const password = urlObj.password;
 
-            // Parse URL to check/fix username
-            // We use 'postgresql://' so URL() works
-            const urlObj = new URL(fixedUrl);
-
-            const projectRef = 'ibnydzahapvnmbtgoxha';
-
-            // If username is just 'postgres', append the project ref
-            if (urlObj.username === 'postgres') {
-                urlObj.username = `postgres.${projectRef}`;
-                console.warn('⚠️ Also fixed username for Pooler compatibility.');
-            }
-
-            return urlObj.toString();
+            // Construct the exact URL that worked in local .env
+            return `postgresql://postgres.ibnydzahapvnmbtgoxha:${password}@aws-1-ap-south-1.pooler.supabase.com:6543/postgres?pgbouncer=true`;
         }
     } catch (e) {
         console.error('Failed to fix connection string:', e);
