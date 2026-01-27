@@ -3,8 +3,8 @@
 @layer base {
   :root {
     /* Standard Tailwind/Shadcn Variables - Mapped to Premium Palette */
-    --background: 40 20% 95%;
-    /* #F5F2ED - Warm Cream */
+    --background: 0 0% 100%;
+    /* #FFFFFF - Pure White */
     --foreground: 20 15% 15%;
     /* #2C2420 - Deep Mocha */
 
@@ -57,8 +57,8 @@
 
   .dark {
     /* Standard Tailwind/Shadcn Variables - Dark Mode */
-    --background: 0 0% 0%;
-    /* Pure Black */
+    --background: 240 10% 3.9%;
+    /* Zinc 950 */
     --foreground: 0 0% 100%;
     /* Pure White */
 
