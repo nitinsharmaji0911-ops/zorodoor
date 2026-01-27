@@ -1,6 +1,5 @@
 import { NextResponse } from 'next/server';
-import { readFileSync } from 'fs';
-import { join } from 'path';
+
 import { prisma } from '@/lib/prisma'; // Still needed for POST/DELETE admin operations
 import { auth } from '@/auth';
 
