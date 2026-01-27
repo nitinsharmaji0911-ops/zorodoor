@@ -11,16 +11,21 @@ const getConnectionString = () => {
 
     try {
         // FIX: Detect if we are trying to connect to Direct Host on Pooler Port (6543)
+        // If pooler fails, fall back to DIRECT connection on port 5432
         if (urlStr.includes('db.ibnydzahapvnmbtgoxha.supabase.co:6543')) {
-            console.warn('⚠️ Detected broken connection string. Aggressively fixing for Supabase Pooler...');
+            console.warn('⚠️ Detected broken connection string. Falling back to DIRECT connection (Port 5432)...');
 
-            // We know the password is correct in the env var, but the rest is messed up.
-            // So we extract the password and construct the known-good URL.
-            const urlObj = new URL(urlStr.replace('db.ibnydzahapvnmbtgoxha.supabase.co:6543', 'example.com')); // Dummy host to parse
-            const password = urlObj.password;
+            // Replace port 6543 with 5432
+            let fixedUrl = urlStr.replace(':6543', ':5432');
 
-            // Construct the exact URL that worked in local .env
-            return `postgresql://postgres.ibnydzahapvnmbtgoxha:${password}@aws-1-ap-south-1.pooler.supabase.com:6543/postgres?pgbouncer=true`;
+            // Remove pgbouncer param if present
+            fixedUrl = fixedUrl.replace('?pgbouncer=true', '');
+            fixedUrl = fixedUrl.replace('&pgbouncer=true', '');
+
+            // Ensure username is 'postgres' (it likely is, but if it was modified, reset it)
+            // Actually, if we use the Vercel provided URL, it has 'postgres' as user (seen in debug), so valid for Direct.
+
+            return fixedUrl;
         }
     } catch (e) {
         console.error('Failed to fix connection string:', e);
