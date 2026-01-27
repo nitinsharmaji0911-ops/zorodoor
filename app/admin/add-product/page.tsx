@@ -14,6 +14,8 @@ export default function AddProductPage() {
         name: "",
         price: "",
         category: "Hoodies",
+        gender: "Unisex",
+        collections: "",
         description: "",
         images: [] as string[],
     });
@@ -64,6 +66,7 @@ export default function AddProductPage() {
                 body: JSON.stringify({
                     ...newItem,
                     price: parseFloat(newItem.price),
+                    collections: newItem.collections.split(',').map(c => c.trim()).filter(c => c),
                     sizes: ["S", "M", "L", "XL"], // Default sizes
                     features: ["Premium Quality", "Streetwear Fit"] // Default features
                 }),
@@ -118,18 +121,41 @@ export default function AddProductPage() {
                             </div>
                         </div>
 
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div>
+                                <label className="block text-sm font-medium text-[--color-text-secondary] mb-1">Category</label>
+                                <select
+                                    className="w-full bg-[--color-bg-primary] border border-[--color-border] rounded-md px-4 py-2 text-[--color-text-primary] focus:border-[--color-accent-cyan] outline-none"
+                                    value={newItem.category}
+                                    onChange={e => setNewItem({ ...newItem, category: e.target.value })}
+                                >
+                                    <option value="Hoodies">Hoodies</option>
+                                    <option value="T-Shirts">T-Shirts</option>
+                                    <option value="Lower">Lower</option>
+                                    <option value="Collectibles">Collectibles</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label className="block text-sm font-medium text-[--color-text-secondary] mb-1">Gender</label>
+                                <select
+                                    className="w-full bg-[--color-bg-primary] border border-[--color-border] rounded-md px-4 py-2 text-[--color-text-primary] focus:border-[--color-accent-cyan] outline-none"
+                                    value={newItem.gender}
+                                    onChange={e => setNewItem({ ...newItem, gender: e.target.value })}
+                                >
+                                    <option value="Unisex">Unisex</option>
+                                    <option value="Men">Men</option>
+                                    <option value="Women">Women</option>
+                                </select>
+                            </div>
+                        </div>
+
                         <div>
-                            <label className="block text-sm font-medium text-[--color-text-secondary] mb-1">Category</label>
-                            <select
-                                className="w-full bg-[--color-bg-primary] border border-[--color-border] rounded-md px-4 py-2 text-[--color-text-primary] focus:border-[--color-accent-cyan] outline-none"
-                                value={newItem.category}
-                                onChange={e => setNewItem({ ...newItem, category: e.target.value })}
-                            >
-                                <option value="Hoodies">Hoodies</option>
-                                <option value="T-Shirts">T-Shirts</option>
-                                <option value="Lower">Lower</option>
-                                <option value="Collectibles">Collectibles</option>
-                            </select>
+                            <label className="block text-sm font-medium text-[--color-text-secondary] mb-1">Collections (comma separated)</label>
+                            <Input
+                                value={newItem.collections}
+                                onChange={e => setNewItem({ ...newItem, collections: e.target.value })}
+                                placeholder="e.g. New Drop, Winter Essential"
+                            />
                         </div>
 
                         <div>
