@@ -79,11 +79,11 @@ export default function Home() {
             </Link>
 
             <Link
-              href="/madamji"
+              href="/women"
               className="group relative h-16 bg-transparent border border-white text-white flex items-center justify-center hover:bg-white hover:text-black transition-all duration-300 backdrop-blur-sm"
             >
               <span className="font-bold text-lg tracking-widest uppercase flex items-center gap-3">
-                Shop Madamji <Sparkles size={18} className="group-hover:rotate-12 transition-transform" />
+                Shop Women <Sparkles size={18} className="group-hover:rotate-12 transition-transform" />
               </span>
             </Link>
           </div>

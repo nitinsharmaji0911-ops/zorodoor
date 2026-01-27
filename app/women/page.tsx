@@ -8,7 +8,7 @@ import Button from "@/components/ui/Button";
 import ProductCard from "@/components/products/ProductCard";
 import { Product } from "@prisma/client";
 
-export default function MadamjiPage() {
+export default function WomenPage() {
     const [products, setProducts] = useState<Product[]>([]);
     const [loading, setLoading] = useState(true);
 
@@ -33,7 +33,7 @@ export default function MadamjiPage() {
             <section className="relative w-full h-[80vh] flex items-center justify-center overflow-hidden bg-black">
                 <Image
                     src="/hero/madamji_bg.png"
-                    alt="Madamji"
+                    alt="Women's Collection"
                     fill
                     className="object-cover opacity-80"
                     priority
@@ -45,7 +45,7 @@ export default function MadamjiPage() {
                         <span className="text-cyan-400 font-black tracking-widest uppercase">The Revolution is Female</span>
                     </div>
                     <h1 className="text-7xl md:text-9xl font-black text-transparent bg-clip-text bg-gradient-to-br from-pink-500 via-purple-500 to-cyan-500 drop-shadow-[0_0_20px_rgba(236,72,153,0.5)] mb-4">
-                        MADAMJI
+                        WOMEN
                     </h1>
                     <p className="text-xl md:text-2xl font-bold text-white/90 tracking-wide max-w-2xl mx-auto">
                         Funky. Fearless. Fatal. <br />

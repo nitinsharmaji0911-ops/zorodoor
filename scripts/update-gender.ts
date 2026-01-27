@@ -14,7 +14,7 @@ async function main() {
         data: { gender: "Men" }
     });
 
-    // Update specific products to Women (Madamji)
+    // Update specific products to Women
     await prisma.product.updateMany({
         where: {
             name: { in: ["Demon Slayer Hoodie", "Just Chilling Palm Tee"] }
