@@ -1,4 +1,5 @@
 import { prisma } from "@/lib/prisma";
+import { Product } from "@prisma/client";
 
 export const dynamic = 'force-dynamic';
 
@@ -9,7 +10,7 @@ export default async function DebugPage() {
     // Mask password
     const mask = (url: string) => url.replace(/:([^:@]+)@/, ":****@");
 
-    let products = [];
+    let products: Product[] = [];
     let errorMsg = null;
 
     try {
