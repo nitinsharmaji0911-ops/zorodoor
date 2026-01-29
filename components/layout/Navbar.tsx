@@ -8,6 +8,7 @@ import { Search, Heart, ShoppingCart, User, Menu, X } from "lucide-react";
 import { useCart } from "@/lib/contexts/CartContext";
 import { useWishlist } from "@/lib/contexts/WishlistContext";
 import { cn } from "@/lib/utils";
+import { ThemeToggle } from "../ThemeToggle";
 
 export default function Navbar() {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -24,7 +25,10 @@ export default function Navbar() {
 
     return (
         <>
-            <nav className="sticky top-0 z-50 bg-background/95 backdrop-blur-md border-b border-border transition-colors duration-300">
+            <nav 
+                className="sticky top-0 z-50  border-[--color-border]"
+                style={{ backgroundColor: 'var(--color-primary-bg-secondary)' }}
+            >
                 <div className="mx-auto max-w-[1440px] px-6 lg:px-12">
                     <div className="flex items-center justify-between h-20 relative">
 
@@ -48,10 +52,10 @@ export default function Navbar() {
                                 <Link
                                     key={link.label}
                                     href={link.href}
-                                    className="relative text-sm font-bold text-foreground tracking-wide uppercase group py-2"
+                                    className="relative text-sm font-bold text-[--color-text-primary] tracking-wide uppercase group py-2"
                                 >
                                     {link.label}
-                                    <span className="absolute bottom-0 left-0 w-0 h-[2px] bg-primary transition-all duration-300 group-hover:w-full" />
+                                    <span className="absolute bottom-0 left-0 w-0 h-[2px] bg-[--color-accent-cyan] transition-all duration-300 group-hover:w-full" />
                                 </Link>
                             ))}
                         </div>
@@ -74,12 +78,12 @@ export default function Navbar() {
                                     value={searchQuery}
                                     onChange={(e) => setSearchQuery(e.target.value)}
                                     // Peer class allows sibling elements to style based on this input's state
-                                    className="peer w-40 focus:w-64 transition-all duration-300 bg-transparent border-b border-foreground/20 py-1 pl-0 pr-8 text-sm text-foreground placeholder:text-foreground/40 focus:outline-none focus:border-primary"
+                                    className="peer w-40 focus:w-64 transition-all duration-300 bg-transparent border-b border-[--color-text-primary]/20 py-1 pl-0 pr-8 text-sm text-[--color-text-primary] placeholder:text-[--color-text-primary]/40 focus:outline-none focus:border-[--color-accent-cyan]"
                                 />
                                 <button type="submit" className="absolute right-0 p-1">
                                     <Search
                                         size={18}
-                                        className="text-foreground"
+                                        className="text-[--color-text-primary]"
                                     />
                                 </button>
 
@@ -97,7 +101,7 @@ export default function Navbar() {
                                                     router.push(`/shop?search=${encodeURIComponent(term)}`);
                                                     (document.activeElement as HTMLElement)?.blur();
                                                 }}
-                                                className="text-left text-sm text-foreground hover:text-primary transition-colors w-full py-1"
+                                                className="text-left text-sm text-[--color-text-primary] hover:text-[--color-accent-cyan] transition-colors w-full py-1"
                                             >
                                                 {term}
                                             </button>
@@ -109,29 +113,31 @@ export default function Navbar() {
                             {/* Action Icons */}
                             <div className="flex items-center gap-5">
                                 <Link href="/wishlist" className="relative group">
-                                    <Heart size={22} className="text-foreground group-hover:text-primary transition-colors" />
+                                    <Heart size={22} className="text-[--color-text-primary] group-hover:text-[--color-accent-cyan] transition-colors" />
                                     {wishlist.length > 0 && (
-                                        <span className="absolute -top-1 -right-1 w-2 h-2 bg-primary rounded-full" />
+                                        <span className="absolute -top-1 -right-1 w-2 h-2 bg-[--color-accent-cyan] rounded-full" />
                                     )}
                                 </Link>
 
                                 <Link href="/cart" className="relative group">
-                                    <ShoppingCart size={22} className="text-foreground group-hover:text-primary transition-colors" />
+                                    <ShoppingCart size={22} className="text-[--color-text-primary] group-hover:text-[--color-accent-cyan] transition-colors" />
                                     {itemCount > 0 && (
-                                        <span className="absolute -top-1.5 -right-1.5 w-4 h-4 bg-primary text-primary-foreground text-[10px] flex items-center justify-center rounded-full font-bold">
+                                        <span className="absolute -top-1.5 -right-1.5 w-4 h-4 bg-[--color-accent-cyan] text-white text-[10px] flex items-center justify-center rounded-full font-bold">
                                             {itemCount}
                                         </span>
                                     )}
                                 </Link>
 
                                 <Link href="/account" className="hidden sm:block group">
-                                    <User size={22} className="text-foreground group-hover:text-primary transition-colors" />
+                                    <User size={22} className="text-[--color-text-primary] group-hover:text-[--color-accent-cyan] transition-colors" />
                                 </Link>
+
+                                <ThemeToggle />
 
                                 {/* Mobile Menu Toggle */}
                                 <button
                                     onClick={() => setIsMenuOpen(!isMenuOpen)}
-                                    className="lg:hidden text-foreground hover:text-primary transition-colors"
+                                    className="lg:hidden text-[--color-text-primary] hover:text-[--color-accent-cyan] transition-colors"
                                     aria-label="Toggle menu"
                                 >
                                     {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
@@ -144,7 +150,7 @@ export default function Navbar() {
 
             {/* Mobile Menu Overlay - Separate from Nav structure to avoid layout conflicts */}
             {isMenuOpen && (
-                <div className="fixed inset-0 z-40 bg-background pt-24 px-6 lg:hidden animate-in fade-in slide-in-from-top-10 duration-200">
+                <div className="fixed inset-0 z-40 bg-[--color-primary-bg-secondary] pt-24 px-6 lg:hidden animate-in fade-in slide-in-from-top-10 duration-200">
                     <div className="flex flex-col space-y-6">
                         <div className="relative mb-8">
                             <input
@@ -152,11 +158,11 @@ export default function Navbar() {
                                 placeholder="Search products..."
                                 value={searchQuery}
                                 onChange={(e) => setSearchQuery(e.target.value)}
-                                className="w-full bg-background/50 border border-border rounded-xl px-4 py-3 text-sm text-foreground focus:outline-none focus:border-primary"
+                                className="w-full bg-[--color-primary-bg]/50 border border-[--color-border] rounded-xl px-4 py-3 text-sm text-[--color-text-primary] focus:outline-none focus:border-[--color-accent-cyan]"
                             />
                             <Search
                                 size={18}
-                                className="absolute right-4 top-1/2 -translate-y-1/2 text-foreground/50"
+                                className="absolute right-4 top-1/2 -translate-y-1/2 text-[--color-text-primary]/50"
                             />
                         </div>
 
@@ -164,17 +170,17 @@ export default function Navbar() {
                             <Link
                                 key={link.label}
                                 href={link.href}
-                                className="text-2xl font-bold text-foreground hover:text-primary transition-colors"
+                                className="text-2xl font-bold text-[--color-text-primary] hover:text-[--color-accent-cyan] transition-colors"
                                 onClick={() => setIsMenuOpen(false)}
                             >
                                 {link.label}
                             </Link>
                         ))}
 
-                        <div className="pt-8 border-t border-border">
+                        <div className="pt-8 border-t border-[--color-border]">
                             <Link
                                 href="/account"
-                                className="flex items-center gap-3 text-lg font-medium text-foreground"
+                                className="flex items-center gap-3 text-lg font-medium text-[--color-text-primary]"
                                 onClick={() => setIsMenuOpen(false)}
                             >
                                 <User size={20} />

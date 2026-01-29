@@ -26,23 +26,23 @@ export default function AccountPage() {
 
     if (!user) {
         return (
-            <div className="min-h-screen flex items-center justify-center bg-[#F5F2ED] dark:bg-black">
+            <div className="min-h-screen flex items-center justify-center bg-[--color-primary-bg-secondary]">
                 <div className="animate-pulse flex flex-col items-center">
-                    <div className="h-12 w-12 bg-gray-300 dark:bg-gray-800 rounded-full mb-4"></div>
-                    <div className="h-4 w-32 bg-gray-300 dark:bg-gray-800 rounded"></div>
+                    <div className="h-12 w-12 bg-[--color-text-secondary]/20 rounded-full mb-4"></div>
+                    <div className="h-4 w-32 bg-[--color-text-secondary]/20 rounded"></div>
                 </div>
             </div>
         );
     }
 
     return (
-        <div className="min-h-screen bg-[#F5F2ED] dark:bg-black text-black dark:text-white py-12 px-4 transition-colors duration-300">
+        <div className="min-h-screen bg-[--color-primary-bg-secondary] text-[--color-text-primary] py-12 px-4 transition-colors duration-300">
             <div className="max-w-6xl mx-auto">
                 {/* Header */}
                 <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-12 gap-4">
                     <div>
                         <h1 className="text-4xl font-black uppercase tracking-tighter">My Account</h1>
-                        <p className="text-zinc-500 dark:text-zinc-400">Welcome back, {user.firstName || "Member"}.</p>
+                        <p className="text-[--color-text-secondary]">Welcome back, {user.firstName || "Member"}.</p>
                     </div>
                     <Button onClick={logout} variant="outline" className="border-red-500 text-red-500 hover:bg-red-500 hover:text-white">
                         <LogOut size={18} className="mr-2" /> Sign Out
@@ -52,9 +52,9 @@ export default function AccountPage() {
                 <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
                     {/* Profile Card */}
                     <div className="lg:col-span-1">
-                        <div className="bg-white dark:bg-zinc-900 rounded-3xl p-8 border border-zinc-200 dark:border-zinc-800 shadow-xl">
+                        <div className="bg-[--color-primary-bg] rounded-3xl p-8 border border-[--color-border] shadow-xl">
                             <div className="flex items-center gap-4 mb-6">
-                                <div className="h-16 w-16 bg-black dark:bg-white rounded-full flex items-center justify-center text-white dark:text-black">
+                                <div className="h-16 w-16 bg-[--color-text-primary] rounded-full flex items-center justify-center text-[--color-primary-bg]">
                                     <UserIcon size={32} />
                                 </div>
                                 <div>
@@ -64,7 +64,7 @@ export default function AccountPage() {
                             </div>
 
                             <div className="space-y-4">
-                                <div className="flex items-center gap-3 text-zinc-600 dark:text-zinc-400">
+                                <div className="flex items-center gap-3 text-[--color-text-secondary]">
                                     <MapPin size={18} />
                                     <span>{user.city || "No address saved"}</span>
                                 </div>
@@ -80,10 +80,10 @@ export default function AccountPage() {
                         </h2>
 
                         {orders.length === 0 ? (
-                            <div className="bg-white dark:bg-zinc-900 rounded-3xl p-12 text-center border border-zinc-200 dark:border-zinc-800">
+                            <div className="bg-[--color-primary-bg] rounded-3xl p-12 text-center border border-[--color-border]">
                                 <Package size={48} className="mx-auto text-zinc-300 mb-4" />
                                 <h3 className="text-xl font-bold mb-2">No orders yet</h3>
-                                <p className="text-zinc-500 mb-6">You haven't placed any orders yet. It's time to change that.</p>
+                                <p className="text-[--color-text-secondary] mb-6">You haven't placed any orders yet. It's time to change that.</p>
                                 <Link href="/shop">
                                     <Button variant="primary">Start Shopping</Button>
                                 </Link>
@@ -91,13 +91,13 @@ export default function AccountPage() {
                         ) : (
                             <div className="space-y-6">
                                 {orders.map((order) => (
-                                    <div key={order.id} className="bg-white dark:bg-zinc-900 rounded-3xl overflow-hidden border border-zinc-200 dark:border-zinc-800 transition-all hover:border-cyan-500/50">
-                                        <div className="p-6 border-b border-zinc-100 dark:border-zinc-800 flex flex-wrap justify-between items-center gap-4 bg-zinc-50 dark:bg-zinc-900/50">
+                                    <div key={order.id} className="bg-[--color-primary-bg] rounded-3xl overflow-hidden border border-[--color-border] transition-all hover:border-[--color-accent-cyan]/50">
+                                        <div className="p-6 border-b border-[--color-border] flex flex-wrap justify-between items-center gap-4 bg-[--color-text-secondary]/5">
                                             <div className="flex items-center gap-4">
-                                                <div className="bg-black dark:bg-white text-white dark:text-black font-bold px-3 py-1 rounded text-xs uppercase tracking-wider">
+                                                <div className="bg-[--color-text-primary] text-[--color-primary-bg] font-bold px-3 py-1 rounded text-xs uppercase tracking-wider">
                                                     {order.status}
                                                 </div>
-                                                <div className="text-sm text-zinc-500 flex items-center gap-1">
+                                                <div className="text-sm text-[--color-text-secondary] flex items-center gap-1">
                                                     <Calendar size={14} />
                                                     {new Date(order.date).toLocaleDateString()}
                                                 </div>
@@ -118,7 +118,7 @@ export default function AccountPage() {
                                                         </div>
                                                         <div className="flex-1">
                                                             <h4 className="font-bold text-sm">{item.name}</h4>
-                                                            <p className="text-xs text-zinc-500">Qty: {item.quantity}</p>
+                                                            <p className="text-xs text-[--color-text-secondary]">Qty: {item.quantity}</p>
                                                         </div>
                                                         <div className="font-medium text-sm">
                                                             {formatPrice(item.price)}
