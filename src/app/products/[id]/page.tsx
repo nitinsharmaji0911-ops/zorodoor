@@ -24,8 +24,43 @@ export default async function ProductPage({ params }: { params: Promise<{ id: st
   const product = PRODUCTS.find(p => p.id === id)
   if (!product) notFound()
 
+  const productSchema = {
+    "@context": "https://schema.org",
+    "@type": "Product",
+    name: product!.name,
+    description: product!.description,
+    image: `https://zorodoor.store${product!.image}`,
+    brand: {
+      "@type": "Brand",
+      name: "ZORODOOR",
+    },
+    offers: {
+      "@type": "Offer",
+      url: `https://zorodoor.store/products/${product!.id}`,
+      priceCurrency: "INR",
+      price: product!.price,
+      priceValidUntil: new Date(new Date().setFullYear(new Date().getFullYear() + 1)).toISOString().split("T")[0],
+      availability: product!.inStock ? "https://schema.org/InStock" : "https://schema.org/OutOfStock",
+      seller: {
+        "@type": "Organization",
+        name: "ZORODOOR",
+      },
+      hasMerchantReturnPolicy: {
+        "@type": "MerchantReturnPolicy",
+        returnPolicyCategory: "https://schema.org/MerchantReturnFiniteReturnWindow",
+        merchantReturnDays: 7,
+        returnMethod: "https://schema.org/ReturnByMail",
+      },
+    },
+    category: product!.category,
+  }
+
   return (
     <div className="bg-white min-h-screen pt-4 pb-20">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(productSchema) }}
+      />
 
       {/* Breadcrumb */}
       <div className="max-w-[1400px] mx-auto px-6 md:px-12 mb-6">
