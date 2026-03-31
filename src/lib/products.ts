@@ -1,0 +1,275 @@
+export interface Product {
+  id: string
+  name: string
+  price: number
+  originalPrice?: number
+  category: string
+  image: string
+  badge?: string
+  description: string
+  features: string[]
+  sizes: string[]
+  inStock: boolean
+  tags: string[]
+}
+
+export const PRODUCTS: Product[] = [
+  // ── Vintage Grails (New Drop) ──────────────────────────────────────────
+  {
+    id: '20',
+    name: 'Vintage Varsity Half-Zip Sweatshirt',
+    price: 3499,
+    originalPrice: 4499,
+    category: 'Sweatshirts',
+    image: '/products/varsity_sweatshirt.png',
+    badge: '🆕 NEW DROP',
+    description: 'Black oversized vintage streetwear sweatshirt with a beige polo collar and a half-zip front. \'Varsity\' embroidered in bold retro script font. Features distinct chest and sleeve patches for an authentic collegiate aesthetic.',
+    features: ['320gsm Heavyweight Fleece', 'Polo Collar with Quarter-Zip', 'Premium Retro Embroidery', 'Authentic Varsity Patches'],
+    sizes: ['S', 'M', 'L', 'XL'],
+    inStock: true,
+    tags: ['varsity', 'sweatshirt', 'vintage', 'half-zip', 'black'],
+  },
+  {
+    id: '21',
+    name: 'Grand Prix Racing Heavy Sweatshirt',
+    price: 3299,
+    originalPrice: 4299,
+    category: 'Sweatshirts',
+    image: '/products/vintage_racer_sweatshirt.png',
+    badge: '🏁 TRENDING',
+    description: 'Heavy washed grey oversized vintage streetwear sweatshirt with a half-zip front and high collar. Bold \'Racing Team\' embroidery and authentic motorsport patches on the chest and sleeves for a pure retro track vibe.',
+    features: ['Heavy Washed Grey Cotton', 'High Collar Half-Zip', 'Motorsport Appliqué Patches', 'Worn-In Vintage Wash'],
+    sizes: ['M', 'L', 'XL', 'XXL'],
+    inStock: true,
+    tags: ['racing', 'motorsport', 'sweatshirt', 'grey', 'vintage', 'track'],
+  },
+
+  // ── Anime Graphic Series ───────────────────────────────────────────────
+  {
+    id: '11',
+    name: 'WAKE UP TO REALITY Oversized Tee',
+    price: 2299,
+    originalPrice: 2799,
+    category: 'T-Shirts',
+    image: '/products/anime_tee_eyes.png',
+    badge: '👁️ TRENDING',
+    description: 'Minimalist anime eyes graphic with sleek typography. Drop shoulders and high-density screen print.',
+    features: ['Premium Cotton Blend', 'Minimalist Screen Print', 'Relaxed Silhouette', 'High-Density Ink'],
+    sizes: ['S', 'M', 'L', 'XL', 'XXL'],
+    inStock: true,
+    tags: ['anime', 'eyes', 'minimalist', 'trending', 'black'],
+  },
+  {
+    id: '13',
+    name: 'Box Head Oversized Tee',
+    price: 2299,
+    originalPrice: 2799,
+    category: 'T-Shirts',
+    image: '/products/anime_tee_boxhead.png',
+    badge: '🆕 NEW DROP',
+    description: 'Quirky box-head anime character with chaotic Japanese street art doodles on a premium sand/beige oversized tee.',
+    features: ['280gsm Heavyweight Cotton', 'Boxy Oversized Fit', 'Japanese Street Art Graphic', 'Pre-Shrunk'],
+    sizes: ['S', 'M', 'L', 'XL'],
+    inStock: true,
+    tags: ['anime', 'japanese', 'streetwear', 'new', 'beige'],
+  },
+  {
+    id: '14',
+    name: 'Zorodoor Script Oversized Tee',
+    price: 1999,
+    originalPrice: 2499,
+    category: 'T-Shirts',
+    image: '/products/anime_tee_typography_cream.png',
+    badge: '✍️ SIGNATURE',
+    description: 'Clean script typography with gothic "Z" sleeve logo. Born from the darkness on premium cream cotton.',
+    features: ['Premium Cotton', 'Script Typography Print', 'Gothic Sleeve Logo', 'Comfort Fit'],
+    sizes: ['M', 'L', 'XL', 'XXL'],
+    inStock: true,
+    tags: ['typography', 'script', 'cream', 'logo', 'signature'],
+  },
+  {
+    id: '15',
+    name: 'Emotionally Unavailable Oversized Tee',
+    price: 2499,
+    originalPrice: 2999,
+    category: 'T-Shirts',
+    image: '/products/anime_tee_numb.png',
+    badge: '🖤 BESTSELLER',
+    description: 'Hooded anime figure surrounded by chaotic graffiti tags. For those who feel everything but say nothing.',
+    features: ['Heavyweight Washed Cotton', 'Graffiti Tag Print', 'Drop Shoulders', 'Boxy Silhouette'],
+    sizes: ['S', 'M', 'L', 'XL', 'XXL'],
+    inStock: true,
+    tags: ['anime', 'graffiti', 'dark', 'bestseller', 'hooded'],
+  },
+  {
+    id: '16',
+    name: 'Alone In A Crowd Oversized Tee',
+    price: 2499,
+    originalPrice: 2999,
+    category: 'T-Shirts',
+    image: '/products/anime_tee_alone.png',
+    badge: '🌧️ MELANCHOLIC',
+    description: 'Anime girl sitting alone in the rain with gothic calligraphy. Melancholic streetwear art on washed gray cotton.',
+    features: ['Washed Gray Cotton', 'Gothic Calligraphy Print', 'Anime Artwork', 'Durable Ribbed Collar'],
+    sizes: ['XS', 'S', 'M', 'L', 'XL', 'XXL'],
+    inStock: true,
+    tags: ['anime', 'gothic', 'melancholic', 'gray', 'rain'],
+  },
+  {
+    id: '17',
+    name: 'Samurai Spirit Oversized Tee',
+    price: 2499,
+    originalPrice: 2999,
+    category: 'T-Shirts',
+    image: '/products/anime_tee_samurai.png',
+    badge: '⚔️ LIMITED',
+    description: 'Bold samurai illustration with Japanese kanji on premium black cotton. For those who live with honor.',
+    features: ['280gsm Black Cotton', 'Full-Front Samurai Print', 'Japanese Kanji Detail', 'Oversized Boxy Fit'],
+    sizes: ['S', 'M', 'L', 'XL'],
+    inStock: true,
+    tags: ['samurai', 'japanese', 'kanji', 'black', 'limited'],
+  },
+  {
+    id: '18',
+    name: 'The Struggler Oversized Tee',
+    price: 2199,
+    originalPrice: 2699,
+    category: 'T-Shirts',
+    image: '/products/anime_tee_struggler.png',
+    badge: '🔥 CULT DROP',
+    description: 'Raw brutalist typography paired with distressed anime art. This one hits different.',
+    features: ['Heavy Pigment Wash', 'Distressed Graphic Print', 'Ribbed Neck', 'Relaxed Silhouette'],
+    sizes: ['S', 'M', 'L', 'XL', 'XXL'],
+    inStock: true,
+    tags: ['brutalist', 'typography', 'anime', 'distressed', 'cult'],
+  },
+  {
+    id: '19',
+    name: 'Cyberpunk Night Oversized Tee',
+    price: 2299,
+    originalPrice: 2799,
+    category: 'T-Shirts',
+    image: '/products/anime_tee_cyberpunk.png',
+    badge: '🤖 SCI-FI',
+    description: 'Neon-infused cyberpunk city illustration on washed black. The future is now.',
+    features: ['Washed Black Cotton', 'Multi-Color Screen Print', 'Drop Shoulder', 'Pre-Washed Texture'],
+    sizes: ['M', 'L', 'XL', 'XXL'],
+    inStock: true,
+    tags: ['cyberpunk', 'neon', 'scifi', 'city', 'black'],
+  },
+
+  // ── Iconic Series ──────────────────────────────────────────────────────
+  {
+    id: '4',
+    name: 'Goku Dragon Oversized Tee',
+    price: 2199,
+    originalPrice: 2699,
+    category: 'T-Shirts',
+    image: '/products/goku_tshirt_front.png',
+    badge: '🐉 ICONIC',
+    description: 'Full-chest Goku illustration in classic anime linework. A tribute to the greatest warrior. Heavyweight cotton, oversized fit.',
+    features: ['280gsm Cotton', 'Full-Chest Linework Print', 'Oversized Drop Shoulder', 'Pre-Washed Softness'],
+    sizes: ['S', 'M', 'L', 'XL', 'XXL'],
+    inStock: true,
+    tags: ['goku', 'dragon ball', 'anime', 'iconic', 'black'],
+  },
+  {
+    id: '8',
+    name: 'Berserk Oversized Tee',
+    price: 2199,
+    originalPrice: 2699,
+    category: 'T-Shirts',
+    image: '/products/berserk_tshirt_front.png',
+    badge: '⚡ DARK FANTASY',
+    description: 'Guts from Berserk — the relentless warrior who never stops fighting. Dark fantasy manga art on heavyweight cotton.',
+    features: ['Heavyweight Washed Cotton', 'Berserk Manga Artwork', 'Boxy Oversized Silhouette', 'Ribbed Cuffs'],
+    sizes: ['S', 'M', 'L', 'XL', 'XXL'],
+    inStock: true,
+    tags: ['berserk', 'guts', 'manga', 'dark', 'fantasy'],
+  },
+
+  // ── Slogan Series ─────────────────────────────────────────────────────
+  {
+    id: '1',
+    name: 'Zero Fucks Oversized Tee',
+    price: 1999,
+    originalPrice: 2499,
+    category: 'T-Shirts',
+    image: '/products/zero_fucks_tshirt.png',
+    badge: '😤 ATTITUDE',
+    description: '"Zero Fucks Given" — the mantra of every person who refuses to conform. Bold typography on premium white cotton.',
+    features: ['Premium White Cotton', 'Bold Slogan Typography', 'Relaxed Oversized Fit', 'Soft Ring-Spun Cotton'],
+    sizes: ['XS', 'S', 'M', 'L', 'XL', 'XXL'],
+    inStock: true,
+    tags: ['slogan', 'typography', 'attitude', 'white', 'bold'],
+  },
+  {
+    id: '2',
+    name: 'Just Chilling Palm Oversized Tee',
+    price: 1999,
+    originalPrice: 2499,
+    category: 'T-Shirts',
+    image: '/products/just_chilling_tshirt.png',
+    badge: '🌴 CHILL VIBES',
+    description: 'Palm illustration with laid-back summer typography. For when you\'re in your "I don\'t care" era.',
+    features: ['Lightweight Cotton', 'Summer Palm Graphic', 'Relaxed Boxy Fit', 'Breathable Weave'],
+    sizes: ['S', 'M', 'L', 'XL', 'XXL'],
+    inStock: true,
+    tags: ['chill', 'palm', 'summer', 'slogan', 'relaxed'],
+  },
+  {
+    id: '3',
+    name: 'Vintage Graphic Oversized Tee',
+    price: 1899,
+    originalPrice: 2399,
+    category: 'T-Shirts',
+    image: '/products/vintage_graphic_tshirt.png',
+    badge: '🕰️ VINTAGE',
+    description: 'Retro-distressed graphic with worn-in appeal. The kind of tee that looks better the longer you wear it.',
+    features: ['Pigment-Dyed Cotton', 'Vintage Distressed Print', 'Lived-In Feel', 'Oversized Boxy Cut'],
+    sizes: ['S', 'M', 'L', 'XL'],
+    inStock: true,
+    tags: ['vintage', 'retro', 'distressed', 'graphic', 'aged'],
+  },
+
+  // ── Essentials ────────────────────────────────────────────────────────
+  {
+    id: '5',
+    name: 'Premium Heavyweight Black Tee',
+    price: 1499,
+    originalPrice: 1899,
+    category: 'T-Shirts',
+    image: '/products/premium_black_tshirt.png',
+    badge: '⬛ ESSENTIAL',
+    description: 'The essential black tee — 280gsm heavyweight cotton in a clean, boxy oversized fit. No graphics. Pure quality.',
+    features: ['280gsm Ring-Spun Cotton', 'Boxy Oversized Silhouette', 'Reinforced Stitching', 'Pre-Shrunk'],
+    sizes: ['XS', 'S', 'M', 'L', 'XL', 'XXL'],
+    inStock: true,
+    tags: ['essential', 'plain', 'black', 'heavyweight', 'basic'],
+  },
+  {
+    id: '6',
+    name: 'Premium Heavyweight White Tee',
+    price: 1499,
+    originalPrice: 1899,
+    category: 'T-Shirts',
+    image: '/products/premium_white_tshirt.png',
+    badge: '⬜ ESSENTIAL',
+    description: 'The essential white tee — 280gsm heavyweight cotton in a clean, boxy oversized fit. Stack with anything.',
+    features: ['280gsm Ring-Spun Cotton', 'Boxy Oversized Silhouette', 'Reinforced Stitching', 'Pre-Shrunk'],
+    sizes: ['XS', 'S', 'M', 'L', 'XL', 'XXL'],
+    inStock: true,
+    tags: ['essential', 'plain', 'white', 'heavyweight', 'basic'],
+  },
+]
+
+export function searchProducts(query: string): Product[] {
+  if (!query.trim()) return PRODUCTS
+  const q = query.toLowerCase()
+  return PRODUCTS.filter(p =>
+    p.name.toLowerCase().includes(q) ||
+    p.description.toLowerCase().includes(q) ||
+    p.tags.some(t => t.includes(q)) ||
+    p.category.toLowerCase().includes(q)
+  )
+}
