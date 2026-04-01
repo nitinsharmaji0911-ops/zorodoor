@@ -71,7 +71,7 @@ export default function Header() {
             <Menu size={22} strokeWidth={2} />
           </button>
 
-          <Link href="/" className="flex-shrink-0 flex items-center hover:opacity-80 transition-opacity">
+          <Link href="/" className="flex-shrink-0 inline-block hover:opacity-80 transition-opacity">
             <Logo className="text-[26px] sm:text-[32px] font-bold tracking-tight" />
           </Link>
 

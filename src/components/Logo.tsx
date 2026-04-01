@@ -7,15 +7,27 @@ interface LogoProps {
 }
 
 export default function Logo({ className = "", inverted = false, style = {} }: LogoProps) {
-  // Use explicit inline color to guarantee visibility regardless of Tailwind runtime or Dark Mode extensions
+  // Use explicit color to guarantee visibility regardless of Tailwind runtime or Dark Mode extensions
   const explicitColor = inverted ? "#ffffff" : "#111111";
   
   return (
-    <span className={`inline-flex items-center leading-[0.9] uppercase ${className}`} 
-          style={{ fontFamily: 'Georgia, "Times New Roman", serif', color: explicitColor, ...style }}>
-      <span className="tracking-tighter">ZOROD</span>
-      <span style={{ letterSpacing: '-0.38em' }}>OO</span>
-      <span style={{ marginLeft: '0.38em' }} className="tracking-tighter">R</span>
-    </span>
+    <svg 
+      viewBox="0 0 400 90" 
+      preserveAspectRatio="xMinYMid meet"
+      className={`inline-block ${className}`}
+      style={{ height: '1.2em', width: 'auto', ...style }}
+    >
+      <text
+        x="0"
+        y="70"
+        fontFamily="Georgia, 'Times New Roman', serif"
+        fontSize="85"
+        fontWeight="bold"
+        fill={explicitColor}
+        letterSpacing="-3"
+      >
+        ZORODOOR
+      </text>
+    </svg>
   );
 }
