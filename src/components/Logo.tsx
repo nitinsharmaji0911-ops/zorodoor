@@ -6,37 +6,23 @@ interface LogoProps {
   style?: React.CSSProperties;
 }
 
-export default function Logo({ className = "", inverted = false, style = {} }: LogoProps) {
-  const fill = inverted ? "#ffffff" : "#111111";
-
+export default function Logo({ inverted = false, style = {} }: LogoProps) {
+  const src = inverted ? '/logo-white.svg' : '/logo-black.svg';
   return (
-    <svg
-      viewBox="0 0 560 80"
-      xmlns="http://www.w3.org/2000/svg"
-      aria-label="ZORODOOR"
-      role="img"
+    // eslint-disable-next-line @next/next/no-img-element
+    <img
+      src={src}
+      alt="ZORODOOR"
+      width={160}
+      height={36}
       style={{
         display: 'block',
         width: '160px',
         height: '36px',
-        overflow: 'visible',
+        objectFit: 'contain',
+        objectPosition: 'left center',
         ...style,
       }}
-      className={className}
-    >
-      <text
-        x="0"
-        y="62"
-        fontFamily="Georgia, 'Times New Roman', serif"
-        fontSize="72"
-        fontWeight="700"
-        fill={fill}
-        letterSpacing="-2"
-        dominantBaseline="auto"
-        textAnchor="start"
-      >
-        ZORODOOR
-      </text>
-    </svg>
+    />
   );
 }
