@@ -72,7 +72,7 @@ export default function Header() {
           </button>
 
           <Link href="/" className="flex-shrink-0 flex items-center hover:opacity-80 transition-opacity">
-            <Logo className="text-[32px] font-bold" />
+            <Logo className="text-[26px] sm:text-[32px] font-bold tracking-tight" />
           </Link>
 
           <nav className="hidden md:flex items-center gap-8">
