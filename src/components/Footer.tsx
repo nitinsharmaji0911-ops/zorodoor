@@ -33,7 +33,7 @@ export default function Footer() {
                     {/* Brand */}
                     <div>
                         <Link href="/" className="inline-block mb-8 hover:opacity-80 transition-opacity">
-                            <Logo className="text-[42px] font-bold" inverted />
+                            <Logo inverted style={{ width: '200px', height: '44px' }} />
                         </Link>
                         <p className="text-[#888] text-sm font-medium mb-6 leading-relaxed">
                             "If Its Boring Its Not Mine." Brutal self-expression through streetwear. Where anime meets fashion.

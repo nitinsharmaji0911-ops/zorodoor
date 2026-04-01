@@ -7,24 +7,33 @@ interface LogoProps {
 }
 
 export default function Logo({ className = "", inverted = false, style = {} }: LogoProps) {
-  // Use explicit color to guarantee visibility regardless of Tailwind runtime or Dark Mode extensions
-  const explicitColor = inverted ? "#ffffff" : "#111111";
-  
+  const fill = inverted ? "#ffffff" : "#111111";
+
   return (
-    <svg 
-      viewBox="0 0 400 90" 
-      preserveAspectRatio="xMinYMid meet"
-      className={`inline-block ${className}`}
-      style={{ height: '1.2em', width: 'auto', ...style }}
+    <svg
+      viewBox="0 0 560 80"
+      xmlns="http://www.w3.org/2000/svg"
+      aria-label="ZORODOOR"
+      role="img"
+      style={{
+        display: 'block',
+        width: '160px',
+        height: '36px',
+        overflow: 'visible',
+        ...style,
+      }}
+      className={className}
     >
       <text
         x="0"
-        y="70"
+        y="62"
         fontFamily="Georgia, 'Times New Roman', serif"
-        fontSize="85"
-        fontWeight="bold"
-        fill={explicitColor}
-        letterSpacing="-3"
+        fontSize="72"
+        fontWeight="700"
+        fill={fill}
+        letterSpacing="-2"
+        dominantBaseline="auto"
+        textAnchor="start"
       >
         ZORODOOR
       </text>

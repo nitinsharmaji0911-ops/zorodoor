@@ -36,7 +36,7 @@ export default function Home() {
             If Its Boring Its Not Mine
           </p>
           <h1 className="mb-8 md:mb-10 drop-shadow-2xl">
-            <Logo className="font-bold scale-110 md:scale-100 origin-left" style={{ fontSize: 'clamp(4rem, 11vw, 10rem)' }} inverted />
+            <Logo inverted style={{ width: 'clamp(220px, 55vw, 750px)', height: 'auto' }} />
           </h1>
           <p className="text-[#aaa] text-sm md:text-lg font-medium max-w-[400px] mb-8 md:mb-12 leading-relaxed drop-shadow-md">
             "Wake up to reality! Nothing ever goes as planned in this accursed world." Heavyweight 280gsm cotton. Authentic streetwear engineered for the streets.
