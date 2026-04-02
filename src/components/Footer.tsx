@@ -36,7 +36,7 @@ export default function Footer() {
                             <Logo inverted width={200} />
                         </Link>
                         <p className="text-[#888] text-sm font-medium mb-6 leading-relaxed">
-                            "If Its Boring Its Not Mine." Brutal self-expression through streetwear. Where anime meets fashion.
+                            "If Its Boring Its Not Mine." ZORODOOR is India's boldest street wear clothing store. Brutal self-expression through premium oversized anime fashion. 
                         </p>
                         <div className="flex space-x-4">
                             <a href="https://www.instagram.com/zorodoor/" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full border border-[#222] flex items-center justify-center text-[#888] hover:text-[#FF3B30] hover:border-[#FF3B30] transition-colors">
@@ -109,7 +109,7 @@ export default function Footer() {
                 {/* Bottom Footer */}
                 <div className="mt-16 pt-8 border-t border-[#1a1a1a] flex flex-col md:flex-row justify-between items-center gap-4">
                     <p className="text-[#555] text-xs font-semibold">
-                        © {new Date().getFullYear()} Zorodoor. "If Its Boring Its Not Mine." All rights reserved. Built for brutal self-expression.
+                        © {new Date().getFullYear()} ZORODOOR | #1 Street Wear Clothing Store. "If Its Boring Its Not Mine." All rights reserved. 
                     </p>
                     <div className="text-xs font-semibold text-[#555]">
                         Designed & Developed by{" "}

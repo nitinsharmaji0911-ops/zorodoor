@@ -87,6 +87,23 @@ export default function Header() {
             <Link href="/search" className="hover:opacity-60 transition-opacity" aria-label="Search">
               <Search size={22} strokeWidth={2} />
             </Link>
+            
+            {mounted && isLoggedIn ? (
+              <Link href="/account/profile" className="flex items-center gap-2">
+                {avatarUrl ? (
+                  <img src={avatarUrl} alt="Profile" className="w-[22px] h-[22px] rounded-full object-cover border border-[#E0E0E0]" />
+                ) : (
+                  <div className="w-[22px] h-[22px] rounded-full bg-[#111] flex items-center justify-center text-white text-[8px] font-black uppercase">
+                    {userInitial}
+                  </div>
+                )}
+              </Link>
+            ) : (
+              <Link href="/login" className="hover:opacity-60 transition-opacity" aria-label="Account">
+                <User size={22} strokeWidth={2} />
+              </Link>
+            )}
+
             <Link href="/checkout" className="relative hover:opacity-60 transition-opacity">
               <ShoppingBag size={22} strokeWidth={2} />
               {mounted && itemCount > 0 && (

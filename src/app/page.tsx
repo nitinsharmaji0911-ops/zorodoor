@@ -94,12 +94,22 @@ export default function Home() {
       </section>
 
       {/* ── Marquee ────────────────────────────── */}
-      <div className="bg-[#0a0a0a] border-y-2 border-[#1a1a1a] py-5 overflow-hidden">
+      <div className="bg-[#0a0a0a] border-y-2 border-[#1a1a1a] py-8 overflow-hidden flex flex-col gap-4">
+        {/* Row 1: Left */}
         <div className="animate-marquee inline-flex whitespace-nowrap">
           {[...Array(5)].map((_, i) => (
             <span key={i} className="font-black text-white uppercase tracking-tight mr-10"
               style={{ fontSize: 'clamp(1.8rem, 4vw, 3.5rem)' }}>
               IF ITS BORING ITS NOT MINE &nbsp;★&nbsp; WAKE UP TO REALITY &nbsp;★&nbsp; SAY FUCK YOU TO SOCIETY ONCE IN A WHILE &nbsp;★&nbsp; I'M IN THE BUSINESS OF WINNING &nbsp;★&nbsp;
+            </span>
+          ))}
+        </div>
+        {/* Row 2: Right (Reverse) */}
+        <div className="animate-marquee-reverse inline-flex whitespace-nowrap opacity-50">
+          {[...Array(5)].map((_, i) => (
+            <span key={i} className="font-black text-white uppercase tracking-tight mr-10"
+              style={{ fontSize: 'clamp(1rem, 2vw, 1.5rem)' }}>
+              ZORODOOR &nbsp;•&nbsp; 280GSM HEAVYWEIGHT COTTON &nbsp;•&nbsp; STREETWEAR ENGINEERED &nbsp;•&nbsp; NO FAST FASHION &nbsp;•&nbsp; LIMITED RUNS &nbsp;•&nbsp;
             </span>
           ))}
         </div>
