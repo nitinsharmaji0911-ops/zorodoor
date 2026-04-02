@@ -3,8 +3,18 @@ import Link from 'next/link'
 import Image from 'next/image'
 
 export const metadata: Metadata = {
-  title: 'Best Sellers | ZORODOOR',
-  description: 'The most hyped pieces in the Zorodoor catalog. Fan favourites that keep selling out.',
+  title: 'Best Sellers | ZORODOOR Street Wear Clothing Store',
+  description: 'Shop ZORODOOR\'s best-selling oversized graphic T-shirts. India\'s top street wear clothing store — fan favourites that keep selling out. Free shipping above ₹999.',
+  keywords: [
+    'best selling streetwear India',
+    'ZORODOOR best sellers',
+    'street wear clothing store top picks',
+    'popular oversized tshirts India',
+    'bestseller anime tshirt India',
+  ],
+  alternates: {
+    canonical: 'https://zorodoor.store/best-sellers',
+  },
 }
 
 const bestSellers = [

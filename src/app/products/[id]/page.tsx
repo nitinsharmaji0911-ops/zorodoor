@@ -11,11 +11,27 @@ export async function generateStaticParams() {
 export async function generateMetadata({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params
   const product = PRODUCTS.find(p => p.id === id)
-  if (!product) return { title: 'Not Found' }
+  if (!product) return { title: 'Not Found | ZORODOOR' }
   return {
-    title: `${product.name} | ZORODOOR`,
-    description: product.description,
-    openGraph: { images: [product.image] }
+    title: `${product.name} | ZORODOOR Street Wear Clothing Store`,
+    description: `${product.description} Shop ${product.name} at ZORODOOR — India's top street wear clothing store. 280gsm heavyweight cotton. Free shipping above ₹999.`,
+    keywords: [
+      product.name,
+      'street wear clothing store',
+      'buy streetwear India',
+      'oversized tshirt India',
+      'ZORODOOR',
+      product.category,
+    ],
+    alternates: {
+      canonical: `https://zorodoor.store/products/${id}`,
+    },
+    openGraph: {
+      title: `${product.name} | ZORODOOR`,
+      description: product.description,
+      images: [{ url: `https://zorodoor.store${product.image}`, width: 800, height: 1000, alt: product.name }],
+      type: 'website',
+    },
   }
 }
 

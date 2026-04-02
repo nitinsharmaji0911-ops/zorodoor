@@ -3,8 +3,18 @@ import Link from 'next/link'
 import Image from 'next/image'
 
 export const metadata: Metadata = {
-  title: 'New Arrivals | ZORODOOR',
-  description: 'Fresh drops just landed. Shop the latest ZORODOOR oversized graphic tees.',
+  title: 'New Arrivals | ZORODOOR Street Wear Clothing Store',
+  description: 'Fresh drops just landed at ZORODOOR — India\'s top street wear clothing store. Shop the latest limited-run oversized anime graphic tees before they sell out.',
+  keywords: [
+    'new streetwear India',
+    'ZORODOOR new arrivals',
+    'street wear clothing store new drops',
+    'latest anime tshirts India',
+    'new oversized tshirt drop',
+  ],
+  alternates: {
+    canonical: 'https://zorodoor.store/new-arrivals',
+  },
 }
 
 const newArrivals = [

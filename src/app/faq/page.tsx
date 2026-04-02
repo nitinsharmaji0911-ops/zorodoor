@@ -1,8 +1,18 @@
 import { Metadata } from 'next'
 
 export const metadata: Metadata = {
-  title: 'FAQ | ZORODOOR',
-  description: 'Frequently Asked Questions about Zorodoor products, shipping, and returns.',
+  title: 'FAQ | ZORODOOR Street Wear Clothing Store',
+  description: 'Frequently asked questions about ZORODOOR — India\'s top street wear clothing store. Find answers about sizing, fabric quality, shipping, COD, and returns.',
+  keywords: [
+    'ZORODOOR FAQ',
+    'street wear clothing store FAQ',
+    'streetwear India shipping FAQ',
+    'oversized tshirt sizing guide India',
+    'ZORODOOR COD returns',
+  ],
+  alternates: {
+    canonical: 'https://zorodoor.store/faq',
+  },
 }
 
 const FAQS = [

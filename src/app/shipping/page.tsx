@@ -1,8 +1,18 @@
 import { Metadata } from 'next'
 
 export const metadata: Metadata = {
-  title: 'Shipping & Returns | ZORODOOR',
-  description: 'Information regarding shipping policies, delivery times, and returns for Zorodoor.',
+  title: 'Shipping & Returns | ZORODOOR Street Wear Clothing Store',
+  description: 'Shipping and returns information for ZORODOOR — India\'s top street wear clothing store. Free Pan-India delivery, 4–6 day dispatch, and 7-day easy return policy.',
+  keywords: [
+    'ZORODOOR shipping policy',
+    'street wear clothing store shipping India',
+    'free shipping streetwear India',
+    'ZORODOOR returns policy',
+    'streetwear India delivery',
+  ],
+  alternates: {
+    canonical: 'https://zorodoor.store/shipping',
+  },
 }
 
 export default function ShippingPage() {

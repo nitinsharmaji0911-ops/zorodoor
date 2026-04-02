@@ -1,8 +1,11 @@
 import { Metadata } from 'next'
 
 export const metadata: Metadata = {
-  title: 'Refund Policy | ZORODOOR',
-  description: 'Learn about the Zorodoor refund and cancellation policy.',
+  title: 'Refund Policy | ZORODOOR Street Wear Clothing Store',
+  description: 'Refund and cancellation policy for ZORODOOR — India\'s top street wear clothing store. 7-day return window, free exchanges for sizing, and easy COD refunds.',
+  alternates: {
+    canonical: 'https://zorodoor.store/refund-policy',
+  },
 }
 
 export default function RefundPolicyPage() {

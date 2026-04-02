@@ -2,9 +2,9 @@ import { Metadata } from 'next'
 import Link from 'next/link'
 
 export const metadata: Metadata = {
-  title: 'About Zorodoor & Founder Nitin Sharma | ZORODOOR',
+  title: 'About Zorodoor & Founder Nitin Sharma | ZORODOOR Street Wear Clothing Store',
   description:
-    'ZORODOOR was founded by Nitin Sharma — an Indian entrepreneur and streetwear designer building India\'s boldest anime-inspired clothing brand. Learn the story behind the brand.',
+    'ZORODOOR was founded by Nitin Sharma — an Indian entrepreneur and streetwear designer building India\'s boldest anime-inspired street wear clothing store. Learn the story behind the brand.',
   keywords: [
     'Nitin Sharma',
     'Nitin Sharma founder',
@@ -13,9 +13,10 @@ export const metadata: Metadata = {
     'ZORODOOR about',
     'Indian streetwear founder',
     'anime streetwear India founder',
+    'street wear clothing store India founder',
   ],
   openGraph: {
-    title: 'About ZORODOOR & Founder Nitin Sharma',
+    title: 'About ZORODOOR & Founder Nitin Sharma | Street Wear Clothing Store',
     description: 'The story of ZORODOOR — founded by Nitin Sharma to give Indian streetwear a brutal, authentic anime identity.',
     type: 'profile',
   },

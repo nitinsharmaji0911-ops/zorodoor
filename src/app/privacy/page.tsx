@@ -1,8 +1,15 @@
 import { Metadata } from 'next'
 
 export const metadata: Metadata = {
-  title: 'Privacy Policy | ZORODOOR',
-  description: 'Zorodoor Privacy Policy and Data Handling Information.',
+  title: 'Privacy Policy | ZORODOOR Street Wear Clothing Store',
+  description: 'Privacy Policy for ZORODOOR — India\'s top street wear clothing store. Learn how we collect, use, and protect your personal data when shopping on zorodoor.store.',
+  alternates: {
+    canonical: 'https://zorodoor.store/privacy',
+  },
+  robots: {
+    index: true,
+    follow: true,
+  },
 }
 
 export default function PrivacyPage() {

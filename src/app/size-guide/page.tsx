@@ -1,8 +1,17 @@
 import { Metadata } from 'next'
 
 export const metadata: Metadata = {
-  title: 'Size Guide | ZORODOOR',
-  description: 'Zorodoor T-Shirt Size Guide. All our garments feature a strict oversized, boxy fit.',
+  title: 'Size Guide | ZORODOOR Street Wear Clothing Store',
+  description: 'ZORODOOR T-Shirt Size Guide. All our street wear clothing is designed with a strict oversized, boxy fit. Find your perfect size with our detailed measurements.',
+  keywords: [
+    'streetwear size guide India',
+    'oversized tshirt sizing India',
+    'ZORODOOR size chart',
+    'street wear clothing size guide',
+  ],
+  alternates: {
+    canonical: 'https://zorodoor.store/size-guide',
+  },
 }
 
 export default function SizeGuidePage() {

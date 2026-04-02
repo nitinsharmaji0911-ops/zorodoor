@@ -1,8 +1,37 @@
+import type { Metadata } from 'next'
 import Link from 'next/link'
 import Image from 'next/image'
 import ProductCard from '@/components/ProductCard'
 import Logo from '@/components/Logo'
 import { PRODUCTS } from '@/lib/products'
+
+export const metadata: Metadata = {
+  title: 'ZORODOOR | #1 Street Wear Clothing Store in India',
+  description:
+    'ZORODOOR — India\'s best street wear clothing store. Shop premium 280gsm oversized graphic T-shirts online. Anime & urban streetwear for those who dare to be different. Free shipping above ₹999.',
+  keywords: [
+    'street wear clothing store',
+    'streetwear clothing store India',
+    'buy streetwear online',
+    'street wear store online India',
+    'ZORODOOR',
+    'oversized tshirt India',
+    'anime streetwear India',
+    'urban clothing store India',
+    'graphic tshirts online',
+    'premium streetwear India',
+  ],
+  alternates: {
+    canonical: 'https://zorodoor.store',
+  },
+  openGraph: {
+    title: 'ZORODOOR | #1 Street Wear Clothing Store in India',
+    description:
+      'Shop India\'s boldest street wear clothing store. Premium 280gsm heavyweight cotton, anime-inspired graphic T-shirts. Free shipping above ₹999.',
+    url: 'https://zorodoor.store',
+    type: 'website',
+  },
+}
 
 const FEATURED = PRODUCTS.slice(0, 8)
 

@@ -3,8 +3,24 @@ import type { Metadata } from 'next'
 import ProductsClient from './ProductsClient'
 
 export const metadata: Metadata = {
-  title: 'T-Shirts | ZORODOOR',
-  description: 'Shop all Zorodoor oversized graphic t-shirts — anime-inspired, heavy cotton, bold prints. Made in India.',
+  title: 'Shop All T-Shirts | ZORODOOR Street Wear Clothing Store',
+  description: 'Shop all ZORODOOR oversized graphic t-shirts — India\'s best street wear clothing store. Anime-inspired, 280gsm heavy cotton, bold prints. Free shipping above ₹999.',
+  keywords: [
+    'street wear clothing store',
+    'buy streetwear online India',
+    'oversized tshirts India',
+    'anime graphic tshirts',
+    'ZORODOOR shop all',
+    'urban clothing India',
+  ],
+  alternates: {
+    canonical: 'https://zorodoor.store/products',
+  },
+  openGraph: {
+    title: 'Shop All T-Shirts | ZORODOOR Street Wear Clothing Store',
+    description: 'Browse India\'s boldest street wear clothing store. 280gsm heavyweight cotton oversized graphic T-shirts.',
+    url: 'https://zorodoor.store/products',
+  },
 }
 
 export default function ProductsPage() {

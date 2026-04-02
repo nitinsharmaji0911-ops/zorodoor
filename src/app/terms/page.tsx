@@ -1,8 +1,11 @@
 import { Metadata } from 'next'
 
 export const metadata: Metadata = {
-  title: 'Terms of Service | ZORODOOR',
-  description: 'Terms of Service governing the use of the Zorodoor website.',
+  title: 'Terms of Service | ZORODOOR Street Wear Clothing Store',
+  description: 'Terms of Service for ZORODOOR — India\'s top street wear clothing store. Read our policies on purchases, limited drops, intellectual property, and governing law.',
+  alternates: {
+    canonical: 'https://zorodoor.store/terms',
+  },
 }
 
 export default function TermsPage() {

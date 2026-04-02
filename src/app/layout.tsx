@@ -25,6 +25,9 @@ export const metadata: Metadata = {
   keywords: [
     "ZORODOOR",
     "Zorodoor",
+    "street wear clothing store",
+    "streetwear clothing store India",
+    "street wear store online",
     "Indian streetwear",
     "anime streetwear India",
     "oversized graphic tshirts India",
@@ -39,6 +42,9 @@ export const metadata: Metadata = {
     "anime fashion India",
     "streetwear brand India",
     "premium oversized tshirt",
+    "buy streetwear online India",
+    "urban clothing store India",
+    "graphic tshirt store",
   ],
   authors: [
     { name: "Nitin Sharma", url: "https://zorodoor.store/about" },
@@ -73,9 +79,10 @@ export const metadata: Metadata = {
     images: ["/products/anime_tee_eyes.png"],
   },
   icons: {
-    icon: [{ url: "/favicon.svg", type: "image/svg+xml" }],
-    shortcut: "/favicon.svg",
-    apple: "/favicon.svg",
+    icon: [
+      { url: "/favicon.svg", type: "image/svg+xml" },
+    ],
+    apple: "/apple-icon",
   },
   robots: {
     index: true,

@@ -3,8 +3,18 @@ import Link from 'next/link'
 import Image from 'next/image'
 
 export const metadata: Metadata = {
-  title: 'Collections | ZORODOOR',
-  description: 'Explore all ZORODOOR streetwear drop collections — Anime, Brutalist, Limited Editions.',
+  title: 'Collections | ZORODOOR Street Wear Clothing Store',
+  description: 'Explore all ZORODOOR streetwear drop collections — Anime, Brutalist & Limited Editions. India\'s top street wear clothing store with premium 280gsm oversized tees.',
+  keywords: [
+    'street wear clothing store collections',
+    'ZORODOOR collections',
+    'anime streetwear collections India',
+    'streetwear drops India',
+    'limited edition tshirts India',
+  ],
+  alternates: {
+    canonical: 'https://zorodoor.store/collections',
+  },
 }
 
 const collections = [

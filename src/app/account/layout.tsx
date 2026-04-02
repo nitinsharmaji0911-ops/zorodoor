@@ -1,7 +1,27 @@
+import type { Metadata } from 'next'
 import { redirect } from 'next/navigation'
 import Link from 'next/link'
 import { createClient } from '@/lib/supabase/server'
 import { User, Package, Heart, Settings, ChevronRight } from 'lucide-react'
+
+export const metadata: Metadata = {
+  title: 'My Account | ZORODOOR Street Wear Clothing Store',
+  description:
+    'Manage your ZORODOOR account — track orders, update your profile, view your wishlist, and access exclusive street wear drops.',
+  keywords: [
+    'ZORODOOR account',
+    'my orders streetwear',
+    'street wear clothing store account',
+  ],
+  alternates: {
+    canonical: 'https://zorodoor.store/account',
+  },
+  robots: {
+    index: false,
+    follow: true,
+  },
+}
+
 
 const NAV = [
   { name: 'Profile',    href: '/account/profile',   icon: User },
