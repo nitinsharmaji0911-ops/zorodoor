@@ -79,7 +79,7 @@ export default function Header() {
 
           <div className="flex justify-center">
             <Link href="/" className="hover:opacity-80 transition-opacity" aria-label="ZORODOOR Home">
-              <Logo className="w-[130px] h-auto" />
+              <Logo className="w-[155px] h-auto" />
             </Link>
           </div>
 
@@ -102,7 +102,7 @@ export default function Header() {
         <div className="hidden md:grid max-w-[1400px] mx-auto px-8 h-[60px] grid-cols-[1fr_auto_1fr] items-center">
           <div className="flex justify-start">
             <Link href="/" className="hover:opacity-80 transition-opacity" aria-label="ZORODOOR Home">
-              <Logo className="w-[160px] h-auto" />
+              <Logo className="w-[185px] h-auto" />
             </Link>
           </div>
 
