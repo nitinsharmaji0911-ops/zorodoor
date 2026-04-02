@@ -3,27 +3,27 @@ import React from 'react';
 interface LogoProps {
   inverted?: boolean;
   style?: React.CSSProperties;
-  /** width in px - height scales proportionally (viewBox is 310x52) */
+  className?: string;
+  /** numeric width fallback */
   width?: number;
 }
 
-export default function Logo({ inverted = false, style = {}, width = 180 }: LogoProps) {
+export default function Logo({ inverted = false, style = {}, className, width }: LogoProps) {
   const src = inverted ? '/logo-white.svg' : '/logo-black.svg';
-  const height = Math.round((52 / 310) * width);
+  
+  // If no className is provided but width is, use fixed inline width to preserve old behavior
+  const effectiveStyle = className ? style : { width: width ? `${width}px` : '180px', height: 'auto', ...style };
+
   return (
     // eslint-disable-next-line @next/next/no-img-element
     <img
       src={src}
       alt="ZORODOOR"
-      width={width}
-      height={height}
+      className={className}
       style={{
         display: 'block',
-        width: `${width}px`,
-        height: `${height}px`,
         objectFit: 'contain',
-        objectPosition: 'left center',
-        ...style,
+        ...effectiveStyle,
       }}
     />
   );

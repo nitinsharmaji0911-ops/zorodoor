@@ -70,12 +70,12 @@ export default function Header() {
       {/* Main Header */}
       <header className="sticky top-0 z-40 bg-white border-b border-[#EBEBEB]">
         <div className="max-w-[1400px] mx-auto px-4 md:px-8 h-[60px] flex items-center justify-between gap-4">
-          <button className="md:hidden" onClick={() => setMobileOpen(!mobileOpen)}>
+          <button className="md:hidden flex-shrink-0" onClick={() => setMobileOpen(!mobileOpen)}>
             <Menu size={22} strokeWidth={2} />
           </button>
 
-          <Link href="/" className="flex-shrink-0 flex items-center hover:opacity-80 transition-opacity" aria-label="ZORODOOR Home">
-            <Logo width={160} />
+          <Link href="/" className="absolute left-[50%] -translate-x-[50%] md:static md:translate-x-0 flex-shrink-0 flex items-center hover:opacity-80 transition-opacity" aria-label="ZORODOOR Home">
+            <Logo className="w-[120px] md:w-[150px] h-auto" />
           </Link>
 
           <nav className="hidden md:flex items-center gap-8">
