@@ -24,6 +24,7 @@ export default function Header() {
 
   const [avatarUrl, setAvatarUrl] = useState<string | null>(null)
   const [userInitial, setUserInitial] = useState<string | null>(null)
+  const [userName, setUserName] = useState<string | null>(null)
   const [isLoggedIn, setIsLoggedIn] = useState(false)
 
   useEffect(() => {
@@ -34,6 +35,7 @@ export default function Header() {
         setIsLoggedIn(true)
         setAvatarUrl(user.user_metadata?.avatar_url || null)
         setUserInitial((user.user_metadata?.full_name || user.email || 'U').charAt(0).toUpperCase())
+        setUserName(user.user_metadata?.full_name || user.email?.split('@')[0] || 'Account')
       }
     })
     const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
@@ -42,6 +44,7 @@ export default function Header() {
         setIsLoggedIn(true)
         setAvatarUrl(user.user_metadata?.avatar_url || null)
         setUserInitial((user.user_metadata?.full_name || user.email || 'U').charAt(0).toUpperCase())
+        setUserName(user.user_metadata?.full_name || user.email?.split('@')[0] || 'Account')
       } else {
         setIsLoggedIn(false)
         setAvatarUrl(null)
@@ -102,14 +105,17 @@ export default function Header() {
 
             {/* User — auth-aware */}
             {mounted && isLoggedIn ? (
-              <Link href="/account/profile" className="hidden sm:flex items-center hover:opacity-80 transition-opacity">
+              <Link href="/account/profile" className="hidden sm:flex items-center gap-2 group transition-all duration-300 py-1 pl-1 pr-1 hover:pr-4 rounded-full border border-transparent hover:bg-[#F5F5F5] hover:border-[#EAEAEA]">
                 {avatarUrl ? (
-                  <img src={avatarUrl} alt="Profile" className="w-7 h-7 rounded-full object-cover border border-[#E0E0E0]" />
+                  <img src={avatarUrl} alt="Profile" className="w-8 h-8 rounded-full object-cover border border-[#E0E0E0] shrink-0" />
                 ) : (
-                  <div className="w-7 h-7 rounded-full bg-[#111] flex items-center justify-center text-white text-[11px] font-black">
+                  <div className="w-8 h-8 rounded-full bg-[#111] flex items-center justify-center text-white text-[12px] font-black shrink-0">
                     {userInitial}
                   </div>
                 )}
+                <span className="text-[12px] font-black text-[#111] opacity-0 max-w-0 overflow-hidden whitespace-nowrap group-hover:max-w-[150px] group-hover:opacity-100 transition-all duration-400 ease-[cubic-bezier(0.16,1,0.3,1)]">
+                  {userName}
+                </span>
               </Link>
             ) : (
               <Link href="/login" className="hover:opacity-60 transition-opacity hidden sm:block">

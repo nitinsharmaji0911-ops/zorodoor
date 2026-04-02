@@ -4,6 +4,7 @@ import Image from 'next/image'
 import ProductCard from '@/components/ProductCard'
 import Logo from '@/components/Logo'
 import { PRODUCTS } from '@/lib/products'
+import { AnimateIn } from '@/components/AnimateIn'
 
 export const metadata: Metadata = {
   title: 'ZORODOOR | #1 Street Wear Clothing Store in India',
@@ -61,22 +62,30 @@ export default function Home() {
 
         {/* Left side: Pure Native HTML Typography (flawless resolution) */}
         <div className="relative z-20 w-full md:w-2/3 px-6 md:px-[8%] pt-16 md:pt-0 max-w-[1400px] mx-auto flex flex-col justify-center" style={{ minHeight: '88vh' }}>
-          <p className="text-[#FF3B30] font-black text-xs md:text-sm tracking-[0.4em] uppercase mb-4 md:mb-6">
-            If Its Boring Its Not Mine
-          </p>
-          <h1 className="mb-8 md:mb-10 drop-shadow-2xl">
-            <Logo inverted width={620} style={{ width: 'clamp(220px, 55vw, 620px)', height: 'auto' }} />
-          </h1>
-          <p className="text-[#aaa] text-sm md:text-lg font-medium max-w-[400px] mb-8 md:mb-12 leading-relaxed drop-shadow-md">
-            "Wake up to reality! Nothing ever goes as planned in this accursed world." Heavyweight 280gsm cotton. Authentic streetwear engineered for the streets.
-          </p>
-          <div className="flex flex-wrap gap-4">
-            <Link href="/products"
-              className="inline-flex items-center justify-center gap-3 bg-white text-black font-black text-sm px-8 py-4 md:px-10 md:py-5 rounded-full uppercase tracking-widest hover:bg-[#FF3B30] hover:text-white hover:scale-105 transition-all duration-300 shadow-[0_0_40px_rgba(255,255,255,0.1)] hover:shadow-[0_0_40px_rgba(255,59,48,0.3)]">
-              Shop The Drop
-              <span className="text-xl leading-none font-normal">→</span>
-            </Link>
-          </div>
+          <AnimateIn delay={0.1}>
+            <p className="text-[#FF3B30] font-black text-xs md:text-sm tracking-[0.4em] uppercase mb-4 md:mb-6">
+              If Its Boring Its Not Mine
+            </p>
+          </AnimateIn>
+          <AnimateIn delay={0.2}>
+            <h1 className="mb-8 md:mb-10 drop-shadow-2xl">
+              <Logo inverted width={620} style={{ width: 'clamp(220px, 55vw, 620px)', height: 'auto' }} />
+            </h1>
+          </AnimateIn>
+          <AnimateIn delay={0.3}>
+            <p className="text-[#aaa] text-sm md:text-lg font-medium max-w-[400px] mb-8 md:mb-12 leading-relaxed drop-shadow-md">
+              "Wake up to reality! Nothing ever goes as planned in this accursed world." Heavyweight 280gsm cotton. Authentic streetwear engineered for the streets.
+            </p>
+          </AnimateIn>
+          <AnimateIn delay={0.4}>
+            <div className="flex flex-wrap gap-4">
+              <Link href="/products"
+                className="inline-flex items-center justify-center gap-3 bg-white text-black font-black text-sm px-8 py-4 md:px-10 md:py-5 rounded-full uppercase tracking-widest hover:bg-[#FF3B30] hover:text-white hover:scale-105 transition-all duration-300 shadow-[0_0_40px_rgba(255,255,255,0.1)] hover:shadow-[0_0_40px_rgba(255,59,48,0.3)]">
+                Shop The Drop
+                <span className="text-xl leading-none font-normal">→</span>
+              </Link>
+            </div>
+          </AnimateIn>
           
           {/* Subtle noise over text area to bind it to dark aesthetic */}
           <div className="fixed inset-0 opacity-[0.03] z-0 pointer-events-none mix-blend-screen"
@@ -97,23 +106,27 @@ export default function Home() {
       </div>
 
       {/* ── Products Section ───────────────────── */}
-      <section className="py-16 px-4 md:px-8 max-w-[1400px] mx-auto">
-        <div className="flex items-end justify-between mb-10">
-          <div>
-            <p className="text-[#999] text-xs font-bold uppercase tracking-widest mb-2">Exclusive Product Lines</p>
-            <h2 className="font-black text-[#111] tracking-tight" style={{ fontSize: 'clamp(2rem, 5vw, 3.5rem)' }}>
-              Core Collection
-            </h2>
+      <section className="py-16 px-4 md:px-8 max-w-[1400px] mx-auto overflow-hidden">
+        <AnimateIn delay={0.1}>
+          <div className="flex items-end justify-between mb-10">
+            <div>
+              <p className="text-[#999] text-xs font-bold uppercase tracking-widest mb-2">Exclusive Product Lines</p>
+              <h2 className="font-black text-[#111] tracking-tight" style={{ fontSize: 'clamp(2rem, 5vw, 3.5rem)' }}>
+                Core Collection
+              </h2>
+            </div>
+            <Link href="/products"
+              className="text-xs font-black uppercase tracking-widest border-b-2 border-[#111] pb-0.5 hover:text-[#FF3B30] hover:border-[#FF3B30] transition-colors">
+              View All →
+            </Link>
           </div>
-          <Link href="/products"
-            className="text-xs font-black uppercase tracking-widest border-b-2 border-[#111] pb-0.5 hover:text-[#FF3B30] hover:border-[#FF3B30] transition-colors">
-            View All →
-          </Link>
-        </div>
+        </AnimateIn>
 
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6">
           {FEATURED.map((product, i) => (
-            <ProductCard key={product.id} product={product} priority={i < 2} />
+            <AnimateIn key={product.id} delay={0.15 + (i * 0.1)} y={40}>
+              <ProductCard product={product} priority={i < 2} />
+            </AnimateIn>
           ))}
         </div>
       </section>
