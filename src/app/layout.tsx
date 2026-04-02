@@ -99,7 +99,7 @@ export const metadata: Metadata = {
     canonical: BASE_URL,
   },
   verification: {
-    google: process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION || "",
+    google: "t-r2gVwBfwZDO3BGWLURZxIWb-g-SPUkSD-Ow8YDieY",
   },
 };
 
