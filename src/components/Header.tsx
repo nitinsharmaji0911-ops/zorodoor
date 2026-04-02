@@ -69,16 +69,44 @@ export default function Header() {
 
       {/* Main Header */}
       <header className="sticky top-0 z-40 bg-white border-b border-[#EBEBEB]">
-        <div className="max-w-[1400px] mx-auto px-4 md:px-8 h-[60px] flex items-center justify-between gap-4">
-          <button className="md:hidden flex-shrink-0" onClick={() => setMobileOpen(!mobileOpen)}>
-            <Menu size={22} strokeWidth={2} />
-          </button>
+        {/* Mobile Layout: 3-column grid (Menu | Logo | Icons) */}
+        <div className="md:hidden max-w-[1400px] mx-auto px-4 h-[60px] grid grid-cols-[1fr_auto_1fr] items-center">
+          <div className="flex justify-start">
+            <button onClick={() => setMobileOpen(!mobileOpen)} className="p-1 -ml-1">
+              <Menu size={24} strokeWidth={2} />
+            </button>
+          </div>
 
-          <Link href="/" className="absolute left-[50%] -translate-x-[50%] md:static md:translate-x-0 flex-shrink-0 flex items-center hover:opacity-80 transition-opacity" aria-label="ZORODOOR Home">
-            <Logo className="w-[120px] md:w-[150px] h-auto" />
-          </Link>
+          <div className="flex justify-center">
+            <Link href="/" className="hover:opacity-80 transition-opacity" aria-label="ZORODOOR Home">
+              <Logo className="w-[130px] h-auto" />
+            </Link>
+          </div>
 
-          <nav className="hidden md:flex items-center gap-8">
+          <div className="flex justify-end items-center gap-3">
+            <Link href="/search" className="hover:opacity-60 transition-opacity" aria-label="Search">
+              <Search size={22} strokeWidth={2} />
+            </Link>
+            <Link href="/checkout" className="relative hover:opacity-60 transition-opacity">
+              <ShoppingBag size={22} strokeWidth={2} />
+              {mounted && itemCount > 0 && (
+                <span className="absolute -top-1.5 -right-1.5 text-[9px] w-4 h-4 bg-[#FF3B30] text-white rounded-full flex items-center justify-center font-black">
+                  {itemCount}
+                </span>
+              )}
+            </Link>
+          </div>
+        </div>
+
+        {/* Desktop Layout: 3-column grid (Logo | Nav | Icons) */}
+        <div className="hidden md:grid max-w-[1400px] mx-auto px-8 h-[60px] grid-cols-[1fr_auto_1fr] items-center">
+          <div className="flex justify-start">
+            <Link href="/" className="hover:opacity-80 transition-opacity" aria-label="ZORODOOR Home">
+              <Logo className="w-[160px] h-auto" />
+            </Link>
+          </div>
+
+          <nav className="flex justify-center items-center gap-8">
             {NAV_LINKS.map((link) => (
               <Link key={link.href} href={link.href}
                 className="text-[13px] font-bold text-[#111] hover:text-[#FF3B30] transition-colors tracking-wide uppercase">
@@ -87,14 +115,12 @@ export default function Header() {
             ))}
           </nav>
 
-          <div className="flex items-center gap-4">
-            {/* Search → full search page */}
+          <div className="flex justify-end items-center gap-4">
             <Link href="/search" className="hover:opacity-60 transition-opacity" aria-label="Search">
               <Search size={20} strokeWidth={2} />
             </Link>
 
-            {/* Wishlist */}
-            <Link href="/account/wishlist" className="relative hover:opacity-60 transition-opacity hidden sm:block" aria-label="Wishlist">
+            <Link href="/account/wishlist" className="relative hover:opacity-60 transition-opacity" aria-label="Wishlist">
               <Heart size={20} strokeWidth={2} />
               {mounted && wishlistCount > 0 && (
                 <span className="absolute -top-2 -right-2 text-[9px] w-4 h-4 bg-[#111] text-white rounded-full flex items-center justify-center font-black">
@@ -103,9 +129,8 @@ export default function Header() {
               )}
             </Link>
 
-            {/* User — auth-aware */}
             {mounted && isLoggedIn ? (
-              <Link href="/account/profile" className="hidden sm:flex items-center gap-2 group transition-all duration-300 py-1 pl-1 pr-1 hover:pr-4 rounded-full border border-transparent hover:bg-[#F5F5F5] hover:border-[#EAEAEA]">
+              <Link href="/account/profile" className="flex items-center gap-2 group transition-all duration-300 py-1 pl-1 pr-1 hover:pr-4 rounded-full border border-transparent hover:bg-[#F5F5F5] hover:border-[#EAEAEA]">
                 {avatarUrl ? (
                   <img src={avatarUrl} alt="Profile" className="w-8 h-8 rounded-full object-cover border border-[#E0E0E0] shrink-0" />
                 ) : (
@@ -118,12 +143,12 @@ export default function Header() {
                 </span>
               </Link>
             ) : (
-              <Link href="/login" className="hover:opacity-60 transition-opacity hidden sm:block">
+              <Link href="/login" className="hover:opacity-60 transition-opacity">
                 <User size={20} strokeWidth={2} />
               </Link>
             )}
 
-            <Link href="/checkout" className="relative hover:opacity-60 transition-opacity">
+            <Link href="/checkout" className="relative hover:opacity-60 transition-opacity ml-1">
               <ShoppingBag size={20} strokeWidth={2} />
               {mounted && itemCount > 0 && (
                 <span className="absolute -top-2 -right-2 text-[9px] w-4 h-4 bg-[#FF3B30] text-white rounded-full flex items-center justify-center font-black">
