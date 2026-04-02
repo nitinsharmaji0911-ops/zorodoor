@@ -2,6 +2,7 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { notFound } from 'next/navigation'
 import AddToCartDetails from './AddToCartDetails'
+import ProductCard from '@/components/ProductCard'
 import { PRODUCTS } from '@/lib/products'
 
 export async function generateStaticParams() {
@@ -158,6 +159,21 @@ export default async function ProductPage({ params }: { params: Promise<{ id: st
             </div>
           </div>
 
+        </div>
+      </div>
+
+      {/* Recommendations Section */}
+      <div className="max-w-[1400px] mx-auto px-6 md:px-12 mt-32">
+        <div className="flex flex-col items-center justify-center text-center mb-10">
+          <p className="text-[#FF3B30] text-[10px] font-black uppercase tracking-[0.2em] mb-2">Continue Shopping</p>
+          <h2 className="font-black text-3xl md:text-4xl uppercase tracking-tighter text-[#111]">
+            You May Also Like
+          </h2>
+        </div>
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
+          {PRODUCTS.filter(p => p.id !== product.id).slice(0, 4).map(p => (
+            <ProductCard key={p.id} product={p} />
+          ))}
         </div>
       </div>
     </div>
