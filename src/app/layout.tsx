@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Space_Grotesk } from "next/font/google";
+import { Space_Grotesk, Bebas_Neue } from "next/font/google";
 import "./globals.css";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
@@ -8,6 +8,14 @@ const spaceGrotesk = Space_Grotesk({
   subsets: ["latin"],
   variable: "--font-space-grotesk",
   weight: ["400", "700"],
+  display: "swap",
+  preload: true,
+});
+
+const bebasNeue = Bebas_Neue({
+  subsets: ["latin"],
+  variable: "--font-bebas-neue",
+  weight: ["400"],
   display: "swap",
   preload: true,
 });
@@ -275,7 +283,7 @@ export default function RootLayout({
           dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteSchema) }}
         />
       </head>
-      <body className={`${spaceGrotesk.variable} antialiased`} suppressHydrationWarning>
+      <body className={`${spaceGrotesk.variable} ${bebasNeue.variable} antialiased`} suppressHydrationWarning>
         <Header />
         <main>{children}</main>
         <Footer />

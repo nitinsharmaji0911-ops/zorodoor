@@ -41,34 +41,58 @@ export default function Home() {
   return (
     <div className="bg-white min-h-screen">
 
-      {/* ── Native Typography Split Hero ───────────────────────────────── */}
-      <section className="relative w-full bg-[#EFEFEF] overflow-hidden flex flex-col md:flex-row items-center" style={{ minHeight: '88vh' }}>
+      {/* ── Premium Streetwear Hero ───────────────────────────────── */}
+      <section className="relative w-full bg-[#111] overflow-hidden flex flex-col items-center justify-center" style={{ minHeight: '90vh' }}>
         
-        {/* Right side / Background: High-Res Light Theme Image */}
+        {/* Background Image */}
         <div className="absolute inset-0 z-10">
           <div className="relative w-full h-full">
             <Image
-              src="/new-hero.png"
-              alt="Zorodoor Core Collection"
+              src="/premium-hero.png"
+              alt="Zorodoor Premium Streetwear Collection"
               fill
-              className="object-cover object-top"
+              className="object-cover object-center brightness-[0.85] contrast-[1.05]"
               priority
-              quality={90}
+              quality={95}
             />
+            {/* Elegant overlay to enhance readability and premium feel */}
+            <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-black/40 z-15" />
           </div>
         </div>
 
-        {/* Button: Centered with slight right offset */}
-        <div className="relative z-20 w-full h-full max-w-[1400px] mx-auto flex items-center justify-center md:justify-center pt-24 md:pt-0" style={{ minHeight: '88vh' }}>
-          <AnimateIn delay={0.2}>
-            <div className="md:translate-x-[50px] lg:translate-x-[100px]">
+        {/* Hero Content Overlay */}
+        <div className="relative z-20 w-full max-w-[1400px] mx-auto px-6 flex flex-col items-center justify-center text-center select-none" style={{ minHeight: '90vh' }}>
+          <div className="max-w-3xl flex flex-col items-center pt-16 md:pt-0">
+            {/* Small Premium Badge / Season Info */}
+            <AnimateIn delay={0.15}>
+              <span className="inline-block text-[11px] font-bold tracking-[0.3em] text-[#FF3B30] uppercase mb-4 bg-black/40 backdrop-blur-md px-5 py-2 rounded-full border border-white/10 shadow-lg">
+                ★ NEW ARRIVALS DROP ★
+              </span>
+            </AnimateIn>
+
+            {/* Premium Typography Title using Bebas Neue */}
+            <AnimateIn delay={0.25}>
+              <h1 className="font-display font-black text-white leading-[0.9] uppercase tracking-tight mb-6 drop-shadow-[0_4px_12px_rgba(0,0,0,0.5)]" style={{ fontSize: 'clamp(3rem, 9vw, 7.5rem)' }}>
+                DEFINING THE <br className="hidden sm:block"/> URBAN EDGE
+              </h1>
+            </AnimateIn>
+
+            {/* Tagline */}
+            <AnimateIn delay={0.35}>
+              <p className="text-white/85 font-medium text-xs md:text-sm tracking-[0.2em] uppercase mb-10 max-w-xl mx-auto leading-relaxed drop-shadow-[0_2px_4px_rgba(0,0,0,0.5)]">
+                Premium 280GSM Heavyweight cotton & high-definition graphic prints. Engineered for those who refuse to be ordinary.
+              </p>
+            </AnimateIn>
+
+            {/* Shop Button */}
+            <AnimateIn delay={0.45}>
               <Link href="/products"
-                className="inline-flex items-center justify-center gap-3 bg-[#111] text-white font-black text-sm px-10 py-5 rounded-full uppercase tracking-widest hover:bg-[#FF3B30] hover:scale-105 transition-all duration-300 shadow-2xl hover:shadow-[0_10px_40px_rgba(255,59,48,0.3)]">
+                className="inline-flex items-center justify-center gap-3 bg-white text-black font-black text-xs md:text-sm px-10 py-5 rounded-full uppercase tracking-widest hover:bg-[#FF3B30] hover:text-white hover:scale-105 transition-all duration-300 shadow-2xl hover:shadow-[0_10px_40px_rgba(255,59,48,0.4)]">
                 Shop The Drop
                 <span className="text-xl leading-none font-normal">→</span>
               </Link>
-            </div>
-          </AnimateIn>
+            </AnimateIn>
+          </div>
           
           {/* Subtle noise overlay */}
           <div className="fixed inset-0 opacity-[0.02] z-0 pointer-events-none mix-blend-multiply"
